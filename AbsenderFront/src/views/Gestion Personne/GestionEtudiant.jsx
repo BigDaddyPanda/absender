@@ -1,10 +1,11 @@
 import React from "react";
-import { Card, CardHeader, CardBody, Row, Col, Breadcrumb, BreadcrumbItem, Button as BBtn } from "reactstrap";
+import { Card, CardHeader, CardBody, Row, Col, Breadcrumb, BreadcrumbItem } from "reactstrap";
 import {Link} from "react-router-dom";
 import { PanelHeader } from "components";
+import RestUtilities from "../../utils/RestUtilities";
 
-import icons from "variables/icons";
-import userAvatar from "assets/img/mike.jpg";
+// import icons from "variables/icons";
+// import userAvatar from "assets/img/mike.jpg";
 
 const Niveau =[
     "CPI-1",
@@ -17,29 +18,38 @@ const Niveau =[
     "C3I-CS",
 ]
 
-const tout_etudiant = [
-    {
-        id_universitaire: "1111",
-        nom: "11x11",
-        classe: "C2I",
-        face: userAvatar,
-    },
-    {
-        id_universitaire: "11211",
-        nom: "11111",
-        classe: "C2I",
-        face: userAvatar,
-    },
-    {
-        id_universitaire: "11131",
-        nom: "14111",
-        classe: "C2I",
-        face: userAvatar,
-    }
-]
+// const tout_etudiant = [
+//     {
+//         id_universitaire: "1111",
+//         nom: "11x11",
+//         classe: "C2I",
+//         face: userAvatar,
+//     },
+//     {
+//         id_universitaire: "11211",
+//         nom: "11111",
+//         classe: "C2I",
+//         face: userAvatar,
+//     },
+//     {
+//         id_universitaire: "11131",
+//         nom: "14111",
+//         classe: "C2I",
+//         face: userAvatar,
+//     }
+// ]
 
 
 class GestionEtudiant extends React.Component {
+    state={
+        list_etudiants:null,
+    }
+    componentWillMount(){
+        RestUtilities.get("api/Filieres").then(response=>{
+            console.log(response);
+            
+        })
+    }
     render() {
         return (
             <div>
@@ -49,11 +59,8 @@ class GestionEtudiant extends React.Component {
                         <Col md={12}>
                             <Card>
                                 <CardHeader>
-                                    <h5 className="title">100 Awesome Nucleo GestionEtudiant</h5>
-                                    <p className="category">
-                                        Handcrafted by our friends from{" "}
-                                        <a href="https://nucleoapp.com/?ref=1712">NucleoApp</a>
-                                    </p>
+                                    <h5 className="title">Liste des Etudiants</h5>
+                                    <p className="category">Cliquez pour étendre la liste des classes</p>
                                 </CardHeader>
                                 <CardBody className="all-icons">
                                         <Breadcrumb>
