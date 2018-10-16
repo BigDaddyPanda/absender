@@ -11,9 +11,10 @@ using System;
 namespace AbsenderAPI.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181016184838_update-professor")]
+    partial class updateprofessor
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -136,8 +137,6 @@ namespace AbsenderAPI.Data.Migrations
 
                     b.Property<string>("DesignationOption");
 
-                    b.Property<bool>("EstCoursSoire");
-
                     b.HasKey("IdFiliere");
 
                     b.ToTable("Filiere");
@@ -187,30 +186,6 @@ namespace AbsenderAPI.Data.Migrations
                     b.HasKey("IdSalle");
 
                     b.ToTable("Salle");
-                });
-
-            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Seance", b =>
-                {
-                    b.Property<int>("IdSseance")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("HeureSeance");
-
-                    b.Property<int>("IdFiliere");
-
-                    b.Property<string>("IdProfesseur");
-
-                    b.Property<int>("IdSalle");
-
-                    b.HasKey("IdSseance");
-
-                    b.HasIndex("IdFiliere");
-
-                    b.HasIndex("IdProfesseur");
-
-                    b.HasIndex("IdSalle");
-
-                    b.ToTable("Seance");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -357,23 +332,6 @@ namespace AbsenderAPI.Data.Migrations
                     b.HasOne("AbsenderAPI.Models.UniversityModels.Filiere")
                         .WithMany("ModuleAssocies")
                         .HasForeignKey("FiliereIdFiliere");
-                });
-
-            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Seance", b =>
-                {
-                    b.HasOne("AbsenderAPI.Models.UniversityModels.Filiere", "FiliereSeance")
-                        .WithMany()
-                        .HasForeignKey("IdFiliere")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("AbsenderAPI.Models.ApplicationUser", "ProfesseurSeance")
-                        .WithMany()
-                        .HasForeignKey("IdProfesseur");
-
-                    b.HasOne("AbsenderAPI.Models.UniversityModels.Salle", "SalleSeance")
-                        .WithMany()
-                        .HasForeignKey("IdSalle")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

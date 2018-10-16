@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -12,6 +13,8 @@ namespace AbsenderAPI.Models.UniversityModels
         public int IdModule { get; set; }
         public string DesignationModule{ get; set; }
         public int TauxTolereModule{ get; set; }
+        [JsonIgnore]
+        public List<Matiere> PanneauModule { get; set; }
 
     }
 }

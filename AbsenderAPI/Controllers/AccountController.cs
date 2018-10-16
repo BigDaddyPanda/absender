@@ -13,6 +13,7 @@ using Microsoft.Extensions.Options;
 using AbsenderAPI.Models;
 using AbsenderAPI.Models.AccountViewModels;
 using AbsenderAPI.Services;
+using AbsenderAPI.Models.UniversityModels;
 
 namespace AbsenderAPI.Controllers
 {
@@ -220,7 +221,8 @@ namespace AbsenderAPI.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                //var contact = new Contact { IdContact= 1, TypeContact= "TypeContact0",    ValeurContact= "ValeurContact0",ClassificationContact= "ClassificationContact0"};
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email, IdContact=1 };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

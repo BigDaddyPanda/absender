@@ -25,5 +25,17 @@ namespace AbsenderAPI.Data
         }
 
         public DbSet<AbsenderAPI.Models.UniversityModels.Absence> Absence { get; set; }
+
+        public DbSet<AbsenderAPI.Models.UniversityModels.Matiere> Matiere { get; set; }
+
+        public DbSet<AbsenderAPI.Models.UniversityModels.Contact> Contact { get; set; }
+
+        public DbSet<AbsenderAPI.Models.UniversityModels.Filiere> Filiere { get; set; }
+
+        public DbSet<AbsenderAPI.Models.UniversityModels.Module> Module { get; set; }
+
+        public DbSet<AbsenderAPI.Models.UniversityModels.Salle> Salle { get; set; }
+
+        public DbSet<AbsenderAPI.Models.UniversityModels.Seance> Seance { get; set; }
     }
 }

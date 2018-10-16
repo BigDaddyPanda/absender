@@ -11,9 +11,10 @@ using System;
 namespace AbsenderAPI.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181016175240_update-strings")]
+    partial class updatestrings
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,8 +35,6 @@ namespace AbsenderAPI.Data.Migrations
                         .HasMaxLength(256);
 
                     b.Property<bool>("EmailConfirmed");
-
-                    b.Property<int?>("FiliereIdFiliere");
 
                     b.Property<int>("IdContact");
 
@@ -71,8 +70,6 @@ namespace AbsenderAPI.Data.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FiliereIdFiliere");
 
                     b.HasIndex("IdContact");
 
@@ -125,24 +122,6 @@ namespace AbsenderAPI.Data.Migrations
                     b.ToTable("Contact");
                 });
 
-            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Filiere", b =>
-                {
-                    b.Property<int>("IdFiliere")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("DesignationClasse");
-
-                    b.Property<string>("DesignationFiliere");
-
-                    b.Property<string>("DesignationOption");
-
-                    b.Property<bool>("EstCoursSoire");
-
-                    b.HasKey("IdFiliere");
-
-                    b.ToTable("Filiere");
-                });
-
             modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Matiere", b =>
                 {
                     b.Property<int>("IdMatiere")
@@ -150,67 +129,9 @@ namespace AbsenderAPI.Data.Migrations
 
                     b.Property<string>("DesignationMatiere");
 
-                    b.Property<int?>("ModuleIdModule");
-
                     b.HasKey("IdMatiere");
 
-                    b.HasIndex("ModuleIdModule");
-
                     b.ToTable("Matiere");
-                });
-
-            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Module", b =>
-                {
-                    b.Property<int>("IdModule")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("DesignationModule");
-
-                    b.Property<int?>("FiliereIdFiliere");
-
-                    b.Property<int>("TauxTolereModule");
-
-                    b.HasKey("IdModule");
-
-                    b.HasIndex("FiliereIdFiliere");
-
-                    b.ToTable("Module");
-                });
-
-            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Salle", b =>
-                {
-                    b.Property<int>("IdSalle")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("DesignationSalle");
-
-                    b.HasKey("IdSalle");
-
-                    b.ToTable("Salle");
-                });
-
-            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Seance", b =>
-                {
-                    b.Property<int>("IdSseance")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("HeureSeance");
-
-                    b.Property<int>("IdFiliere");
-
-                    b.Property<string>("IdProfesseur");
-
-                    b.Property<int>("IdSalle");
-
-                    b.HasKey("IdSseance");
-
-                    b.HasIndex("IdFiliere");
-
-                    b.HasIndex("IdProfesseur");
-
-                    b.HasIndex("IdSalle");
-
-                    b.ToTable("Seance");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -323,10 +244,6 @@ namespace AbsenderAPI.Data.Migrations
 
             modelBuilder.Entity("AbsenderAPI.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("AbsenderAPI.Models.UniversityModels.Filiere")
-                        .WithMany("EtudiantsFiliere")
-                        .HasForeignKey("FiliereIdFiliere");
-
                     b.HasOne("AbsenderAPI.Models.UniversityModels.Contact", "ContactUtilisateur")
                         .WithMany()
                         .HasForeignKey("IdContact")
@@ -343,37 +260,6 @@ namespace AbsenderAPI.Data.Migrations
                     b.HasOne("AbsenderAPI.Models.ApplicationUser", "User")
                         .WithMany()
                         .HasForeignKey("IdUtilisateur");
-                });
-
-            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Matiere", b =>
-                {
-                    b.HasOne("AbsenderAPI.Models.UniversityModels.Module")
-                        .WithMany("PanneauModule")
-                        .HasForeignKey("ModuleIdModule");
-                });
-
-            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Module", b =>
-                {
-                    b.HasOne("AbsenderAPI.Models.UniversityModels.Filiere")
-                        .WithMany("ModuleAssocies")
-                        .HasForeignKey("FiliereIdFiliere");
-                });
-
-            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Seance", b =>
-                {
-                    b.HasOne("AbsenderAPI.Models.UniversityModels.Filiere", "FiliereSeance")
-                        .WithMany()
-                        .HasForeignKey("IdFiliere")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("AbsenderAPI.Models.ApplicationUser", "ProfesseurSeance")
-                        .WithMany()
-                        .HasForeignKey("IdProfesseur");
-
-                    b.HasOne("AbsenderAPI.Models.UniversityModels.Salle", "SalleSeance")
-                        .WithMany()
-                        .HasForeignKey("IdSalle")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
