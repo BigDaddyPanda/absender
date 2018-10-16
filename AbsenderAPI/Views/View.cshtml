@@ -1,0 +1,46 @@
+﻿@model AbsenderAPI.Models.UniversityModels.Absence
+
+@{
+    ViewData["Title"] = "View";
+}
+
+<h2>View</h2>
+
+<h4>Absence</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="View">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TauxAbsence" class="control-label"></label>
+                <input asp-for="TauxAbsence" class="form-control" />
+                <span asp-validation-for="TauxAbsence" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MessageAbsence" class="control-label"></label>
+                <input asp-for="MessageAbsence" class="form-control" />
+                <span asp-validation-for="MessageAbsence" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdUtilisateur" class="control-label"></label>
+                <select asp-for="IdUtilisateur" class ="form-control" asp-items="ViewBag.IdUtilisateur"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdMatiere" class="control-label"></label>
+                <select asp-for="IdMatiere" class ="form-control" asp-items="ViewBag.IdMatiere"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

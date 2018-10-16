@@ -55,6 +55,10 @@ namespace AbsenderAPI
 
             app.UseStaticFiles();
 
+            app.UseCors(builder =>
+                builder.WithOrigins("http://localhost:3000")
+                       .AllowAnyHeader()
+                );
             app.UseAuthentication();
 
             app.UseMvc(routes =>
