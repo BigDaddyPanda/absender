@@ -11,12 +11,10 @@ namespace AbsenderAPI.Models.UniversityModels
     {
         [Key]
         public int IdFiliere { get; set; }
-        public string DesignationFiliere { get; set; }//CII
-        public string DesignationOption { get; set; }//DSEN
-        public string DesignationClasse { get; set; }//DSEN1
-        public bool EstCoursSoire { get; set; }
-        [JsonIgnore]
-        public List<ApplicationUser> EtudiantsFiliere{ get; set; }
+        public string TagFiliere { get; set; } // CII
+        public string DesignationFiliere { get; set; } // Complete Internation Inst.
+        public string TagOption { get; set; } // DSEN
+        public string DesignationOption { get; set; } //DataScienceENgineering
         [JsonIgnore]
         public List<Module> ModuleAssocies { get; set; }
     }

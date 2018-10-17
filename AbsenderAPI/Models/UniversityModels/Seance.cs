@@ -16,8 +16,8 @@ namespace AbsenderAPI.Models.UniversityModels
         [JsonIgnore]
         public int IdFiliere { get; set; }
         [JsonIgnore]
-        [ForeignKey("IdFiliere")]
-        public Filiere FiliereSeance { get; set; }
+        [ForeignKey("IdGroupe")]
+        public Groupe GroupeSeance { get; set; }
 
         [JsonIgnore]
         public string IdProfesseur{ get; set; }

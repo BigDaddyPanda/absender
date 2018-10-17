@@ -11,57 +11,57 @@ using AbsenderAPI.Models.UniversityModels;
 namespace AbsenderAPI.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Matieres")]
-    public class MatieresController : Controller
+    [Route("api/Groupes")]
+    public class GroupesController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public MatieresController(ApplicationDbContext context)
+        public GroupesController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Matieres
+        // GET: api/Groupes
         [HttpGet]
-        public IEnumerable<Matiere> GetMatiere()
+        public IEnumerable<Groupe> GetGroupe()
         {
-            return _context.Matiere;
+            return _context.Groupe;
         }
 
-        // GET: api/Matieres/5
+        // GET: api/Groupes/5
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetMatiere([FromRoute] int id)
+        public async Task<IActionResult> GetGroupe([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var matiere = await _context.Matiere.SingleOrDefaultAsync(m => m.IdMatiere == id);
+            var groupe = await _context.Groupe.SingleOrDefaultAsync(m => m.IdGroupe == id);
 
-            if (matiere == null)
+            if (groupe == null)
             {
                 return NotFound();
             }
 
-            return Ok(matiere);
+            return Ok(groupe);
         }
 
-        // PUT: api/Matieres/5
+        // PUT: api/Groupes/5
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutMatiere([FromRoute] int id, [FromBody] Matiere matiere)
+        public async Task<IActionResult> PutGroupe([FromRoute] int id, [FromBody] Groupe groupe)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != matiere.IdMatiere)
+            if (id != groupe.IdGroupe)
             {
                 return BadRequest();
             }
 
-            _context.Entry(matiere).State = EntityState.Modified;
+            _context.Entry(groupe).State = EntityState.Modified;
 
             try
             {
@@ -69,7 +69,7 @@ namespace AbsenderAPI.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!MatiereExists(id))
+                if (!GroupeExists(id))
                 {
                     return NotFound();
                 }
@@ -82,45 +82,45 @@ namespace AbsenderAPI.Controllers
             return NoContent();
         }
 
-        // POST: api/Matieres
+        // POST: api/Groupes
         [HttpPost]
-        public async Task<IActionResult> PostMatiere([FromBody] Matiere matiere)
+        public async Task<IActionResult> PostGroupe([FromBody] Groupe groupe)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _context.Matiere.Add(matiere);
+            _context.Groupe.Add(groupe);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetMatiere", new { id = matiere.IdMatiere }, matiere);
+            return CreatedAtAction("GetGroupe", new { id = groupe.IdGroupe }, groupe);
         }
 
-        // DELETE: api/Matieres/5
+        // DELETE: api/Groupes/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteMatiere([FromRoute] int id)
+        public async Task<IActionResult> DeleteGroupe([FromRoute] int id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var matiere = await _context.Matiere.SingleOrDefaultAsync(m => m.IdMatiere == id);
-            if (matiere == null)
+            var groupe = await _context.Groupe.SingleOrDefaultAsync(m => m.IdGroupe == id);
+            if (groupe == null)
             {
                 return NotFound();
             }
 
-            _context.Matiere.Remove(matiere);
+            _context.Groupe.Remove(groupe);
             await _context.SaveChangesAsync();
 
-            return Ok(matiere);
+            return Ok(groupe);
         }
 
-        private bool MatiereExists(int id)
+        private bool GroupeExists(int id)
         {
-            return _context.Matiere.Any(e => e.IdMatiere == id);
+            return _context.Groupe.Any(e => e.IdGroupe == id);
         }
     }
 }

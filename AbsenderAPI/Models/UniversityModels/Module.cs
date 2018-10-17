@@ -12,9 +12,6 @@ namespace AbsenderAPI.Models.UniversityModels
         [Key]
         public int IdModule { get; set; }
         public string DesignationModule{ get; set; }
-        public int TauxTolereModule{ get; set; }
-        [JsonIgnore]
-        public List<Matiere> PanneauModule { get; set; }
 
     }
 }

@@ -37,5 +37,7 @@ namespace AbsenderAPI.Data
         public DbSet<AbsenderAPI.Models.UniversityModels.Salle> Salle { get; set; }
 
         public DbSet<AbsenderAPI.Models.UniversityModels.Seance> Seance { get; set; }
+
+        public DbSet<AbsenderAPI.Models.UniversityModels.Groupe> Groupe { get; set; }
     }
 }

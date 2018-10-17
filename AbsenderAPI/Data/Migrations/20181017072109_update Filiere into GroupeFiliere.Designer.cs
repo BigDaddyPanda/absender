@@ -11,9 +11,10 @@ using System;
 namespace AbsenderAPI.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181017072109_update Filiere into GroupeFiliere")]
+    partial class updateFiliereintoGroupeFiliere
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -170,13 +171,11 @@ namespace AbsenderAPI.Data.Migrations
 
                     b.Property<string>("DesignationMatiere");
 
-                    b.Property<int>("IdModule");
-
-                    b.Property<int>("TauxTolereModule");
+                    b.Property<int?>("ModuleIdModule");
 
                     b.HasKey("IdMatiere");
 
-                    b.HasIndex("IdModule");
+                    b.HasIndex("ModuleIdModule");
 
                     b.ToTable("Matiere");
                 });
@@ -189,6 +188,8 @@ namespace AbsenderAPI.Data.Migrations
                     b.Property<string>("DesignationModule");
 
                     b.Property<int?>("FiliereIdFiliere");
+
+                    b.Property<int>("TauxTolereModule");
 
                     b.HasKey("IdModule");
 
@@ -377,10 +378,9 @@ namespace AbsenderAPI.Data.Migrations
 
             modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Matiere", b =>
                 {
-                    b.HasOne("AbsenderAPI.Models.UniversityModels.Module", "ModuleMatiere")
-                        .WithMany()
-                        .HasForeignKey("IdModule")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("AbsenderAPI.Models.UniversityModels.Module")
+                        .WithMany("PanneauModule")
+                        .HasForeignKey("ModuleIdModule");
                 });
 
             modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Module", b =>

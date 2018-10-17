@@ -1,44 +1,10 @@
 import React from "react";
 import { Card,CardTitle, CardHeader, CardBody, Row, Col, Breadcrumb, BreadcrumbItem, Button,Table, UncontrolledCollapse, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import { PanelHeader } from "components";
 import RestUtilities from "../../utils/RestUtilities";
 import { thead, tbody } from "variables/general";
-
-// import icons from "variables/icons";
-// import userAvatar from "assets/img/mike.jpg";
-
-// const Niveau = [
-//     "CPI-1",
-//     "CPI-2",
-//     "TIC",
-//     "C2I",
-//     "C3I",
-//     "C3I-CS",
-//     "C3I-CS",
-//     "C3I-CS",
-// ]
-
-// const tout_etudiant = [
-//     {
-//         id_universitaire: "1111",
-//         nom: "11x11",
-//         classe: "C2I",
-//         face: userAvatar,
-//     },
-//     {
-//         id_universitaire: "11211",
-//         nom: "11111",
-//         classe: "C2I",
-//         face: userAvatar,
-//     },
-//     {
-//         id_universitaire: "11131",
-//         nom: "14111",
-//         classe: "C2I",
-//         face: userAvatar,
-//     }
-// ]
+import { etudiant_headline } from "../../variables/utilities";
 
 class GestionEtudiant extends React.Component {
     state = {
@@ -168,7 +134,7 @@ class GestionEtudiant extends React.Component {
                                     <Table responsive>
                                         <thead className="text-primary">
                                             <tr>
-                                                {thead.map((prop, key) => {
+                                                {etudiant_headline.map((prop, key) => {
                                                     if (key === thead.length - 1)
                                                         return (
                                                             <th key={key} className="text-right">
@@ -179,24 +145,7 @@ class GestionEtudiant extends React.Component {
                                                 })}
                                             </tr>
                                         </thead>
-                                        <tbody>
-                                            {tbody.map((prop, key) => {
-                                                return (
-                                                    <tr key={key}>
-                                                        {prop.data.map((prop, key) => {
-                                                            if (key === thead.length - 1)
-                                                                return (
-                                                                    <td key={key} className="text-right">
-                                                                        {prop}
-                                                                    </td>
-                                                                );
-                                                            return <td key={key}>{prop}</td>;
-                                                        })}
-                                                    </tr>
-                                                );
-                                            })}
-                                        </tbody>
-                                    </Table>
+                                           </Table>
                                 </CardBody>
                             </Card>
                         </Col>

@@ -11,9 +11,10 @@ using System;
 namespace AbsenderAPI.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20181017072712_update Filiere into GroupeFiliere and other Updates")]
+    partial class updateFiliereintoGroupeFiliereandotherUpdates
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
