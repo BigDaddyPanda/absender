@@ -90,7 +90,14 @@ namespace AbsenderAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            var ModulesFiliere = filiere.ModuleAssocies;
+            List<Module> M = new List<Module>();
+            foreach(var m in ModulesFiliere)
+            {
+                var entite_module = _context.Module.FirstOrDefault(u => u.IdModule.Equals(m.IdModule));
+                M.Add(entite_module);
+            }
+            filiere.ModuleAssocies = M;
             _context.Filiere.Add(filiere);
             await _context.SaveChangesAsync();
 

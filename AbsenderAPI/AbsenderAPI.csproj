@@ -5,6 +5,11 @@
     <UserSecretsId>aspnet-AbsenderAPI-26151DFE-42A2-42BA-959A-008FC68E7A75</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Data\Migrations\20181017095506_model update for module.cs" />
+    <Compile Remove="Data\Migrations\20181017095506_model update for module.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />

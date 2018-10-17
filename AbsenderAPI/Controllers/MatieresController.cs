@@ -90,7 +90,8 @@ namespace AbsenderAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            var module = _context.Module.FirstOrDefault(u => u.IdModule.Equals(matiere.IdModule));
+            matiere.ModuleMatiere = module;            
             _context.Matiere.Add(matiere);
             await _context.SaveChangesAsync();
 

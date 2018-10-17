@@ -25,7 +25,7 @@ namespace AbsenderAPI.Controllers
         [HttpGet]
         public IEnumerable<Groupe> GetGroupe()
         {
-            return _context.Groupe;
+            return _context.Groupe.Include(group=>group.FiliereGroupe);
         }
 
         // GET: api/Groupes/5
@@ -90,7 +90,8 @@ namespace AbsenderAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            var filiere = _context.Filiere.FirstOrDefault(u => u.IdFiliere.Equals(groupe.IdFiliere));
+            groupe.FiliereGroupe = filiere;
             _context.Groupe.Add(groupe);
             await _context.SaveChangesAsync();
 

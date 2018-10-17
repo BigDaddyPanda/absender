@@ -15,7 +15,7 @@ namespace AbsenderAPI.Models.UniversityModels
         public string DesignationFiliere { get; set; } // Complete Internation Inst.
         public string TagOption { get; set; } // DSEN
         public string DesignationOption { get; set; } //DataScienceENgineering
-        [JsonIgnore]
+        //[JsonIgnore]
         public List<Module> ModuleAssocies { get; set; }
     }
 }
