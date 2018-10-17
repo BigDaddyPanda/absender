@@ -54,13 +54,6 @@ var dashRoutes = [
     icon: "design-2_ruler-pencil",
     component: GestionEtudiant,
   },
-  {
-    pro: true,
-    path: "/upgrade",
-    name: "Upgrade to PRO",
-    icon: "objects_spaceship",
-    component: Upgrade
-  },
   { redirect: true, path: "/", pathTo: "/dashboard", name: "Dashboard" }
 ];
 export default dashRoutes;

@@ -40,7 +40,6 @@ export default class RestUtilities {
 
     static request(method, url, data) {
         //heads to localhost:44312
-        let isJsonResponse = false;
         let isBadRequest = false;
         let body = data;
         let headers = new Headers();
@@ -68,7 +67,6 @@ export default class RestUtilities {
 
                 let responseContentType = response.headers.get("content-type");
                 if (responseContentType && responseContentType.indexOf("application/json") !== -1) {
-                    isJsonResponse = true;
                     return response.json();
                 } else {
                     return response.text();
