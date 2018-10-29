@@ -18,7 +18,7 @@ using AbsenderAPI.Data;
 
 namespace AbsenderAPI.Controllers
 {
-    //[Authorize]
+    [Authorize]
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
@@ -26,15 +26,13 @@ namespace AbsenderAPI.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
-        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ApplicationDbContext _context;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
-            RoleManager<IdentityRole> roleManager,
-            SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ILogger<AccountController> logger,
+            SignInManager<ApplicationUser> signInManager,
             ApplicationDbContext context)
         {
             _userManager = userManager;
@@ -42,7 +40,6 @@ namespace AbsenderAPI.Controllers
             _emailSender = emailSender;
             _logger = logger;
             _context = context;
-            _roleManager = roleManager;
         }
 
         [TempData]
@@ -222,7 +219,7 @@ namespace AbsenderAPI.Controllers
 
         [HttpPost]
         [AllowAnonymous]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
@@ -230,18 +227,7 @@ namespace AbsenderAPI.Controllers
             {
                 var contact = new Contact { IdContact = 1, TypeContact = "TypeContact0", ValeurContact = "ValeurContact0", ClassificationContact = "ClassificationContact0" };
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, IdContact=1 };
-                
 
-                IdentityResult roleResult;
-
-                var roleCheck = await _roleManager.RoleExistsAsync("Godzilla");
-                if (!roleCheck)
-                {
-                    //create the roles and seed them to the database
-                    roleResult = await _roleManager.CreateAsync(new IdentityRole("Godzilla"));
-                }
-
-                await _userManager.AddToRoleAsync(user, "Godzilla");
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -252,6 +238,8 @@ namespace AbsenderAPI.Controllers
                     await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
                     await _signInManager.SignInAsync(user, isPersistent: false);
+                    await _userManager.AddToRoleAsync(user, "SuperAdministrateur");
+
                     _logger.LogInformation("User created a new account with password.");
                     return RedirectToLocal(returnUrl);
                 }
@@ -459,10 +447,11 @@ namespace AbsenderAPI.Controllers
         }
 
         #region tryout
+        [Authorize(Roles = "SuperAdministrateur")]
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAllAsync()
         {
-            var x = _userManager.GetUsersInRoleAsync("GODZILLA");
+            var x = await _userManager.GetUsersInRoleAsync("SuperAdministrateur");
             return Ok(x);
         }
         #endregion
