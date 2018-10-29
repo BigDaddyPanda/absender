@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using AbsenderAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AbsenderAPI.Controllers
 {
@@ -12,7 +13,10 @@ namespace AbsenderAPI.Controllers
     {
         public IActionResult Index()
         {
+            string[] myArray = { "value01", "value02", "value03" };
+            ViewData["Admins"] = myArray;
             return View();
+
         }
 
         public IActionResult About()
@@ -25,6 +29,12 @@ namespace AbsenderAPI.Controllers
         public IActionResult Contact()
         {
             ViewData["Message"] = "Your contact page.";
+
+            return View();
+        }
+        [Authorize]
+        public IActionResult AdminsList()
+        {
 
             return View();
         }

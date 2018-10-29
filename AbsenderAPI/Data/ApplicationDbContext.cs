@@ -22,9 +22,19 @@ namespace AbsenderAPI.Data
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
-            builder.Entity<Filiere>()
-            .HasMany(b => b.ModuleAssocies)
-            .WithOne();
+
+            builder.Entity<FiliereModuleAssociation>()
+            .HasKey(t => new { t.IdFiliere, t.IdModule});
+
+            builder.Entity<FiliereModuleAssociation>()
+                .HasOne(pt => pt.Filiere)
+                .WithMany(p => p.AssociationModuleFiliere)
+                .HasForeignKey(pt => pt.IdFiliere);
+
+            builder.Entity<FiliereModuleAssociation>()
+                .HasOne(pt => pt.Module)
+                .WithMany(t => t.AssociationModuleFiliere)
+                .HasForeignKey(pt => pt.IdModule);
         }
 
         public DbSet<AbsenderAPI.Models.UniversityModels.Absence> Absence { get; set; }
@@ -42,5 +52,7 @@ namespace AbsenderAPI.Data
         public DbSet<AbsenderAPI.Models.UniversityModels.Seance> Seance { get; set; }
 
         public DbSet<AbsenderAPI.Models.UniversityModels.Groupe> Groupe { get; set; }
+
+        public DbSet<AbsenderAPI.Models.UniversityModels.FiliereModuleAssociation> FiliereModuleAssociation { get; set; }
     }
 }

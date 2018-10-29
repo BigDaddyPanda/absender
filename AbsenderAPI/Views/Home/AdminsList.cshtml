@@ -1,0 +1,55 @@
+﻿@model IEnumerable<AbsenderAPI.Models.ApplicationUser>
+
+@{
+    ViewData["Title"] = "AdminList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>AdminList</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.IdNationalUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUniversitaireUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrivilegeUser)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhotoProfilUser)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.IdNationalUser)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.IdUniversitaireUser)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.PrivilegeUser)
+            </td>
+            <td>
+                @Html.DisplayNameFor(model => model.PhotoProfilUser)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdNationalUser">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdNationalUser">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdNationalUser">Delete</a>
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

@@ -60,11 +60,13 @@ namespace AbsenderAPI.Controllers
             {
                 return BadRequest();
             }
+            //filiere.AssociationModuleFiliere = new List<FiliereModuleAssociation>();
+            //filiere.AssociationModuleFiliere.Add(new FiliereModuleAssociation { IdFiliere = 1, IdModule = 3 });
 
             _context.Entry(filiere).State = EntityState.Modified;
-
             try
             {
+                _context.SaveChanges();
                 await _context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
@@ -81,7 +83,54 @@ namespace AbsenderAPI.Controllers
 
             return NoContent();
         }
+        #region sync put
+        [HttpPut("sync/{id}")]
+        public async void PutFiliereSync([FromRoute] int id, [FromBody] Filiere filiere)
+        {
+            if (!ModelState.IsValid)
+            {
+                return ;
+            }
 
+            if (id != filiere.IdFiliere)
+            {
+                return;
+            }
+            //filiere.AssociationModuleFiliere = new List<FiliereModuleAssociation>();
+            //filiere.AssociationModuleFiliere.Add(new FiliereModuleAssociation { IdFiliere = 1, IdModule = 3 });
+
+            filiere.AssociationModuleFiliere.ForEach(e =>
+            {
+                if (_context.FiliereModuleAssociation.FirstOrDefault(u => u.IdFiliere.Equals(e.IdFiliere) && u.IdModule.Equals(e.IdModule)) == null)
+                {
+                    _context.FiliereModuleAssociation.Add(new FiliereModuleAssociation
+                    {
+                        IdModule = e.IdModule,
+                        IdFiliere = e.IdFiliere
+                    });
+                }
+            });
+            _context.Entry(filiere).State = EntityState.Modified;
+            try
+            {
+                _context.SaveChanges();
+                //await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!FiliereExists(id))
+                {
+                    return ;
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return ;
+        }
+        #endregion
         // POST: api/Filieres
         [HttpPost]
         public async Task<IActionResult> PostFiliere([FromBody] Filiere filiere)
@@ -90,14 +139,7 @@ namespace AbsenderAPI.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var ModulesFiliere = filiere.ModuleAssocies;
-            List<Module> M = new List<Module>();
-            foreach(var m in ModulesFiliere)
-            {
-                var entite_module = _context.Module.FirstOrDefault(u => u.IdModule.Equals(m.IdModule));
-                M.Add(entite_module);
-            }
-            filiere.ModuleAssocies = M;
+
             _context.Filiere.Add(filiere);
             await _context.SaveChangesAsync();
 

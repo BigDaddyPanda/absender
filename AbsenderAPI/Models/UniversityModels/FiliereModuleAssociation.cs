@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,12 +7,14 @@ using System.Threading.Tasks;
 
 namespace AbsenderAPI.Models.UniversityModels
 {
-    public class Module
+    public class FiliereModuleAssociation
     {
-        [Key]
+        public int IdFiliere { get; set; }
         public int IdModule { get; set; }
-        public string DesignationModule{ get; set; }
-        //[JsonIgnore]
-        public List<FiliereModuleAssociation> AssociationModuleFiliere { get; set; }
+        [ForeignKey("IdModule")]
+        public Module Module { get; set; }
+        [ForeignKey("IdFiliere")]
+        public Filiere Filiere { get; set; }
+
     }
 }

@@ -14,10 +14,11 @@ using AbsenderAPI.Models;
 using AbsenderAPI.Models.AccountViewModels;
 using AbsenderAPI.Services;
 using AbsenderAPI.Models.UniversityModels;
+using AbsenderAPI.Data;
 
 namespace AbsenderAPI.Controllers
 {
-    [Authorize]
+    //[Authorize]
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
@@ -25,17 +26,23 @@ namespace AbsenderAPI.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly ApplicationDbContext _context;
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
+            RoleManager<IdentityRole> roleManager,
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
-            ILogger<AccountController> logger)
+            ILogger<AccountController> logger,
+            ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
+            _context = context;
+            _roleManager = roleManager;
         }
 
         [TempData]
@@ -223,6 +230,18 @@ namespace AbsenderAPI.Controllers
             {
                 var contact = new Contact { IdContact = 1, TypeContact = "TypeContact0", ValeurContact = "ValeurContact0", ClassificationContact = "ClassificationContact0" };
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email, IdContact=1 };
+                
+
+                IdentityResult roleResult;
+
+                var roleCheck = await _roleManager.RoleExistsAsync("Godzilla");
+                if (!roleCheck)
+                {
+                    //create the roles and seed them to the database
+                    roleResult = await _roleManager.CreateAsync(new IdentityRole("Godzilla"));
+                }
+
+                await _userManager.AddToRoleAsync(user, "Godzilla");
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -439,6 +458,14 @@ namespace AbsenderAPI.Controllers
             return View();
         }
 
+        #region tryout
+        [HttpGet]
+        public IActionResult GetAll()
+        {
+            var x = _userManager.GetUsersInRoleAsync("GODZILLA");
+            return Ok(x);
+        }
+        #endregion
         #region Helpers
 
         private void AddErrors(IdentityResult result)
