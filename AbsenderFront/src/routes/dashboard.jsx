@@ -8,6 +8,7 @@ import Dashboard from "views/Dashboard/Dashboard.jsx";
 // import UserPage from "views/UserPage/UserPage.jsx";
 import TestOne from "../views/TestFolder/TestOne";
 import GestionEtudiant from "views/Gestion Personne/GestionEtudiant";
+import { PrivateRoute } from "../_components";
 
 var dashRoutes = [
   {

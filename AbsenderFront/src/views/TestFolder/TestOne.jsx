@@ -40,17 +40,8 @@ export default class TestOne extends Component {
                 <PanelHeader
                     content={
                         <div className="header text-center">
-                            <h2 className="title">Notifications</h2>
-                            <p className="category">
-                                Please Checkout{" "}
-                                <a
-                                    href="https://github.com/creativetimofficial/react-notification-alert"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    The Full Documentation
-                </a>.
-              </p>
+                            <h2 className="title">Test Module</h2>
+                            
                         </div>
                     }
                 />
