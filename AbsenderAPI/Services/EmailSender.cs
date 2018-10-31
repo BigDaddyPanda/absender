@@ -21,19 +21,27 @@ namespace AbsenderAPI.Services
             client.EnableSsl = true;
             client.Credentials = new NetworkCredential("tekupabsender@gmail.com", "@Absender123");
             initialized = true;
-
-
         }
 
         public Task SendEmailAsync(string email, string subject, string message)
         {
             if (!initialized) InitializeConnexion();
-            MailMessage mailMessage = new MailMessage();
-            mailMessage.From = new MailAddress("tekupabsender@gmail.com");
-            mailMessage.To.Add(email);
-            mailMessage.Subject = subject;
-            mailMessage.Body = message;
-            client.Send(mailMessage);
+            try
+            {
+
+                MailMessage mailMessage = new MailMessage();
+                mailMessage.From = new MailAddress("tekupabsender@gmail.com");
+                mailMessage.To.Add(email);
+                mailMessage.Subject = subject;
+                mailMessage.IsBodyHtml = true;
+                mailMessage.Body = message;
+                client.Send(mailMessage);
+
+            }
+            catch
+            {
+                Console.WriteLine("CC");
+            }
             return Task.CompletedTask;
         }
     }

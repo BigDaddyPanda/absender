@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using AbsenderAPI.Data;
+﻿using AbsenderAPI.Data;
+using AbsenderAPI.Managers;
 using AbsenderAPI.Models;
 using AbsenderAPI.Services;
-using AbsenderAPI.Managers;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System;
+using System.Linq;
 
 namespace AbsenderAPI
 {
@@ -25,28 +23,6 @@ namespace AbsenderAPI
         public IConfiguration Configuration { get; }
 
 
-        #region Roles
-        //private async Task CreateUserRoles(IServiceProvider serviceProvider)
-        //{
-        //    var RoleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-        //    var UserManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-
-        //    IdentityResult roleResult;
-        //    //Adding Admin Role
-        //    var roleCheck = await RoleManager.RoleExistsAsync("SuperAdmin");
-        //    if (!roleCheck)
-        //    {
-        //        //create the roles and seed them to the database
-        //        roleResult = await RoleManager.CreateAsync(new IdentityRole("SuperAdmin"));
-        //    }
-        //    //Assign Admin role to the main User here we have given our newly registered 
-        //    //login id for Admin management
-        //    ApplicationUser user = await UserManager.FindByEmailAsync("test@test.com");
-        //    var User = new ApplicationUser();
-        //    await UserManager.AddToRoleAsync(user, "SuperAdmin");
-        //}
-
-        #endregion
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -56,12 +32,28 @@ namespace AbsenderAPI
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+            services.Configure<IdentityOptions>(options =>
+            {
+                // Password settings
+                options.Password.RequireDigit = false;
+                options.Password.RequiredLength = 4;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequiredUniqueChars = 2;
 
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(30);
+                options.Lockout.MaxFailedAccessAttempts = 10;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings
+                options.User.RequireUniqueEmail = true;
+            });
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped<IRoleManagement, RoleManangement>();
 
-            //services.AddScoped<RoleManangement, RoleManager<IdentityRole>>();
             services.AddMvc();
         }
 
@@ -94,7 +86,7 @@ namespace AbsenderAPI
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
             roleManagement.Initialize();
-            //RoleManangement.SeedRoles(app.ApplicationServices).Wait(); 
+           
         }
     }
 }

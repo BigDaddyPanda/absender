@@ -11,10 +11,9 @@ namespace AbsenderAPI.Controllers
 {
     public class HomeController : Controller
     {
+        
         public IActionResult Index()
         {
-            string[] myArray = { "value01", "value02", "value03" };
-            ViewData["Admins"] = myArray;
             return View();
 
         }
@@ -32,15 +31,13 @@ namespace AbsenderAPI.Controllers
 
             return View();
         }
-        [Authorize]
-        public IActionResult AdminsList()
-        {
-
-            return View();
-        }
+        
 
         public IActionResult Error()
         {
+
+            string[] myArray = { "value01", "value02", "value03" };
+            ViewData["admins"] = myArray;
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }

@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using AbsenderAPI.Models;
 using AbsenderAPI.Models.UniversityModels;
+using AbsenderAPI.Models.AccountViewModels;
 
 namespace AbsenderAPI.Data
 {
@@ -54,5 +55,7 @@ namespace AbsenderAPI.Data
         public DbSet<AbsenderAPI.Models.UniversityModels.Groupe> Groupe { get; set; }
 
         public DbSet<AbsenderAPI.Models.UniversityModels.FiliereModuleAssociation> FiliereModuleAssociation { get; set; }
+
+        public DbSet<AbsenderAPI.Models.AccountViewModels.AdminViewModel> AdminViewModel { get; set; }
     }
 }

@@ -32,6 +32,17 @@
                 <input asp-for="ConfirmPassword" class="form-control" />
                 <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
             </div>
+            <div class="form-group">
+                <label asp-for="Role"></label><br />
+                @*<input asp-for="Role" value="SuperAdministratuer" type="radio" class="form-control" />*@
+                <div class="radio">
+                    @Html.RadioButtonFor(m => m.Role, "SuperAdministrateur", new { @id = "Role" })@Html.Label("Super Administratuer")
+                </div>
+                @*<input asp-for="Role" value="Administrateur" type="radio" class="form-control" />*@
+                <div class="radio">
+                    @Html.RadioButtonFor(m => m.Role, "Administrateur", new { @id = "Role" })@Html.Label("Administrateur")
+                </div>                <span asp-validation-for="Role" class="text-danger"></span>
+            </div>
             <button type="submit" class="btn btn-default">Register</button>
         </form>
     </div>

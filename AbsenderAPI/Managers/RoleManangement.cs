@@ -13,7 +13,7 @@ namespace AbsenderAPI.Managers
         public enum Roles
         {
             SuperAdministrateur,
-            Administrateurr,
+            Administrateur,
             Enseignant,
             Etudiant
         }

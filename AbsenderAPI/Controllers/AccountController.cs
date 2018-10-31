@@ -1,20 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Claims;
-using System.Threading.Tasks;
+﻿using AbsenderAPI.Data;
+using AbsenderAPI.Models;
+using AbsenderAPI.Models.AccountViewModels;
+using AbsenderAPI.Models.UniversityModels;
+using AbsenderAPI.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using AbsenderAPI.Models;
-using AbsenderAPI.Models.AccountViewModels;
-using AbsenderAPI.Services;
-using AbsenderAPI.Models.UniversityModels;
-using AbsenderAPI.Data;
+using System;
+using System.Linq;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace AbsenderAPI.Controllers
 {
@@ -40,6 +37,7 @@ namespace AbsenderAPI.Controllers
             _emailSender = emailSender;
             _logger = logger;
             _context = context;
+
         }
 
         [TempData]
@@ -49,6 +47,7 @@ namespace AbsenderAPI.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null)
         {
+
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
@@ -66,7 +65,7 @@ namespace AbsenderAPI.Controllers
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await _signInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
@@ -226,19 +225,22 @@ namespace AbsenderAPI.Controllers
             if (ModelState.IsValid)
             {
                 var contact = new Contact { IdContact = 1, TypeContact = "TypeContact0", ValeurContact = "ValeurContact0", ClassificationContact = "ClassificationContact0" };
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, IdContact=1 };
+                var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, IdContact = 1 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
+                    //await _emailSender.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                    if (returnUrl == null)
+                    {
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                        await _userManager.AddToRoleAsync(user, model.Role);
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
-                    await _userManager.AddToRoleAsync(user, "SuperAdministrateur");
+                    }
 
                     _logger.LogInformation("User created a new account with password.");
                     return RedirectToLocal(returnUrl);
@@ -445,14 +447,40 @@ namespace AbsenderAPI.Controllers
         {
             return View();
         }
+        #region SA CRUDS
+        [HttpGet]
+        [Authorize(Roles="SuperAdministrateur")]
+        public async Task<IActionResult> Delete(string Id,string returnUrl=null)
+        {
+            ApplicationUser user = await _userManager.FindByIdAsync(Id);
+            //var adminenum = await _userManager.GetUsersInRoleAsync("Administrateur");
+            //var x = await Task.FromResult<ApplicationUser>(user);
+
+
+            if (user != null)
+            {
+                await _userManager.DeleteAsync(user);
+            }
+            return RedirectToLocal(returnUrl);
+
+        }
+        #endregion
+
 
         #region tryout
         [Authorize(Roles = "SuperAdministrateur")]
         [HttpGet]
-        public async Task<IActionResult> GetAllAsync()
+        public async Task<IActionResult> AdminsList()
         {
-            var x = await _userManager.GetUsersInRoleAsync("SuperAdministrateur");
-            return Ok(x);
+            var adminenum = await _userManager.GetUsersInRoleAsync("Administrateur");
+            var superadmincollection = await _userManager.GetUsersInRoleAsync("SuperAdministrateur");
+            var a_list = adminenum.Select(a => new AdminViewModel{ UserName= a.UserName, Email =a.Email , Id= a.Id}).ToList();
+            var sa_list = superadmincollection.Select(a => new AdminViewModel { UserName = a.UserName, Email = a.Email, Id = a.Id }).ToList();
+
+            ViewData["Administrateurs"] = a_list;
+            ViewData["SuperAdministrateurs"] = sa_list;
+
+            return View();
         }
         #endregion
         #region Helpers
