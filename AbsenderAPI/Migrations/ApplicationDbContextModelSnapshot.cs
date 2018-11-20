@@ -8,13 +8,12 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace AbsenderAPI.Data.Migrations
+namespace AbsenderAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181016185238_update-cours-soir")]
-    partial class updatecourssoir
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -36,13 +35,13 @@ namespace AbsenderAPI.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<int?>("FiliereIdFiliere");
+                    b.Property<int?>("GroupeIdGroupe");
 
                     b.Property<int>("IdContact");
 
-                    b.Property<string>("IdNationalUser");
+                    b.Property<string>("IdNational");
 
-                    b.Property<string>("IdUniversitaireUser");
+                    b.Property<string>("IdUniversitaire");
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -60,9 +59,7 @@ namespace AbsenderAPI.Data.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
-                    b.Property<string>("PhotoProfilUser");
-
-                    b.Property<string>("PrivilegeUser");
+                    b.Property<string>("PhotoProfil");
 
                     b.Property<string>("SecurityStamp");
 
@@ -73,9 +70,10 @@ namespace AbsenderAPI.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FiliereIdFiliere");
+                    b.HasIndex("GroupeIdGroupe");
 
-                    b.HasIndex("IdContact");
+                    b.HasIndex("IdContact")
+                        .IsUnique();
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -93,19 +91,15 @@ namespace AbsenderAPI.Data.Migrations
                     b.Property<int>("IdAbsence")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("IdMatiere");
+                    b.Property<string>("IdEtudiant");
 
-                    b.Property<string>("IdUtilisateur");
-
-                    b.Property<string>("MessageAbsence");
-
-                    b.Property<int>("TauxAbsence");
+                    b.Property<int>("IdSeance");
 
                     b.HasKey("IdAbsence");
 
-                    b.HasIndex("IdMatiere");
+                    b.HasIndex("IdEtudiant");
 
-                    b.HasIndex("IdUtilisateur");
+                    b.HasIndex("IdSeance");
 
                     b.ToTable("Absence");
                 });
@@ -115,33 +109,27 @@ namespace AbsenderAPI.Data.Migrations
                     b.Property<int>("IdContact")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("ClassificationContact");
-
-                    b.Property<string>("TypeContact");
-
-                    b.Property<string>("ValeurContact");
+                    b.Property<string>("IdUser");
 
                     b.HasKey("IdContact");
+
+                    b.HasIndex("IdUser");
 
                     b.ToTable("Contact");
                 });
 
-            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Filiere", b =>
+            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Groupe", b =>
                 {
-                    b.Property<int>("IdFiliere")
+                    b.Property<int>("IdGroupe")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("DesignationClasse");
+                    b.Property<int>("IdOption");
 
-                    b.Property<string>("DesignationFiliere");
+                    b.HasKey("IdGroupe");
 
-                    b.Property<string>("DesignationOption");
+                    b.HasIndex("IdOption");
 
-                    b.Property<bool>("EstCoursSoire");
-
-                    b.HasKey("IdFiliere");
-
-                    b.ToTable("Filiere");
+                    b.ToTable("Groupe");
                 });
 
             modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Matiere", b =>
@@ -149,67 +137,67 @@ namespace AbsenderAPI.Data.Migrations
                     b.Property<int>("IdMatiere")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("DesignationMatiere");
-
-                    b.Property<int?>("ModuleIdModule");
+                    b.Property<int>("IdPanier");
 
                     b.HasKey("IdMatiere");
 
-                    b.HasIndex("ModuleIdModule");
+                    b.HasIndex("IdPanier");
 
                     b.ToTable("Matiere");
                 });
 
-            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Module", b =>
+            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Niveau", b =>
                 {
-                    b.Property<int>("IdModule")
+                    b.Property<int>("IdNiveau")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("DesignationModule");
+                    b.HasKey("IdNiveau");
 
-                    b.Property<int?>("FiliereIdFiliere");
-
-                    b.Property<int>("TauxTolereModule");
-
-                    b.HasKey("IdModule");
-
-                    b.HasIndex("FiliereIdFiliere");
-
-                    b.ToTable("Module");
+                    b.ToTable("Niveau");
                 });
 
-            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Salle", b =>
+            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Option", b =>
                 {
-                    b.Property<int>("IdSalle")
+                    b.Property<int>("IdOption")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("DesignationSalle");
+                    b.Property<int>("IdNiveau");
 
-                    b.HasKey("IdSalle");
+                    b.HasKey("IdOption");
 
-                    b.ToTable("Salle");
+                    b.HasIndex("IdNiveau");
+
+                    b.ToTable("Option");
+                });
+
+            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Panier", b =>
+                {
+                    b.Property<int>("IdPanier")
+                        .ValueGeneratedOnAdd();
+
+                    b.HasKey("IdPanier");
+
+                    b.ToTable("Panier");
                 });
 
             modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Seance", b =>
                 {
-                    b.Property<int>("IdSseance")
+                    b.Property<int>("IdSeance")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("HeureSeance");
+                    b.Property<string>("IdEnseignant");
 
-                    b.Property<int>("IdFiliere");
+                    b.Property<int>("IdGroupe");
 
-                    b.Property<string>("IdProfesseur");
+                    b.Property<int>("IdMatiere");
 
-                    b.Property<int>("IdSalle");
+                    b.HasKey("IdSeance");
 
-                    b.HasKey("IdSseance");
+                    b.HasIndex("IdEnseignant");
 
-                    b.HasIndex("IdFiliere");
+                    b.HasIndex("IdGroupe");
 
-                    b.HasIndex("IdProfesseur");
-
-                    b.HasIndex("IdSalle");
+                    b.HasIndex("IdMatiere");
 
                     b.ToTable("Seance");
                 });
@@ -324,56 +312,73 @@ namespace AbsenderAPI.Data.Migrations
 
             modelBuilder.Entity("AbsenderAPI.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("AbsenderAPI.Models.UniversityModels.Filiere")
-                        .WithMany("EtudiantsFiliere")
-                        .HasForeignKey("FiliereIdFiliere");
+                    b.HasOne("AbsenderAPI.Models.UniversityModels.Groupe")
+                        .WithMany("Etudiants")
+                        .HasForeignKey("GroupeIdGroupe");
 
                     b.HasOne("AbsenderAPI.Models.UniversityModels.Contact", "ContactUtilisateur")
-                        .WithMany()
-                        .HasForeignKey("IdContact")
+                        .WithOne()
+                        .HasForeignKey("AbsenderAPI.Models.ApplicationUser", "IdContact")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Absence", b =>
                 {
-                    b.HasOne("AbsenderAPI.Models.UniversityModels.Matiere", "Matiere")
+                    b.HasOne("AbsenderAPI.Models.ApplicationUser", "Etudiant")
                         .WithMany()
-                        .HasForeignKey("IdMatiere")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("IdEtudiant");
 
+                    b.HasOne("AbsenderAPI.Models.UniversityModels.Seance", "Seance")
+                        .WithMany("Absences")
+                        .HasForeignKey("IdSeance")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Contact", b =>
+                {
                     b.HasOne("AbsenderAPI.Models.ApplicationUser", "User")
                         .WithMany()
-                        .HasForeignKey("IdUtilisateur");
+                        .HasForeignKey("IdUser");
+                });
+
+            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Groupe", b =>
+                {
+                    b.HasOne("AbsenderAPI.Models.UniversityModels.Option", "Option")
+                        .WithMany("Groupes")
+                        .HasForeignKey("IdOption")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Matiere", b =>
                 {
-                    b.HasOne("AbsenderAPI.Models.UniversityModels.Module")
-                        .WithMany("PanneauModule")
-                        .HasForeignKey("ModuleIdModule");
+                    b.HasOne("AbsenderAPI.Models.UniversityModels.Panier", "Panier")
+                        .WithMany("Matieres")
+                        .HasForeignKey("IdPanier")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Module", b =>
+            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Option", b =>
                 {
-                    b.HasOne("AbsenderAPI.Models.UniversityModels.Filiere")
-                        .WithMany("ModuleAssocies")
-                        .HasForeignKey("FiliereIdFiliere");
+                    b.HasOne("AbsenderAPI.Models.UniversityModels.Niveau", "Niveau")
+                        .WithMany("niveauoptions")
+                        .HasForeignKey("IdNiveau")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Seance", b =>
                 {
-                    b.HasOne("AbsenderAPI.Models.UniversityModels.Filiere", "FiliereSeance")
+                    b.HasOne("AbsenderAPI.Models.ApplicationUser", "Enseignant")
                         .WithMany()
-                        .HasForeignKey("IdFiliere")
+                        .HasForeignKey("IdEnseignant");
+
+                    b.HasOne("AbsenderAPI.Models.UniversityModels.Groupe", "Groupe")
+                        .WithMany("Seances")
+                        .HasForeignKey("IdGroupe")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("AbsenderAPI.Models.ApplicationUser", "ProfesseurSeance")
-                        .WithMany()
-                        .HasForeignKey("IdProfesseur");
-
-                    b.HasOne("AbsenderAPI.Models.UniversityModels.Salle", "SalleSeance")
-                        .WithMany()
-                        .HasForeignKey("IdSalle")
+                    b.HasOne("AbsenderAPI.Models.UniversityModels.Matiere", "Matiere")
+                        .WithMany("Seances")
+                        .HasForeignKey("IdMatiere")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

@@ -13,10 +13,9 @@ namespace AbsenderAPI.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
-        public string IdNationalUser { get; set; }
-        public string IdUniversitaireUser { get; set; }
-        public string PrivilegeUser { get; set; }
-        public string PhotoProfilUser { get; set; }
+        public string IdNational{ get; set; }
+        public string IdUniversitaire{ get; set; }
+        public string PhotoProfil{ get; set; }
 
         [JsonIgnore]
         public int IdContact{ get; set; }

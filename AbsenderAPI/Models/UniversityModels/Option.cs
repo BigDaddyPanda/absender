@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 
 namespace AbsenderAPI.Models.UniversityModels
 {
-    public class Groupe
+    public class Option
     {
         [Key]
-        public int IdGroupe { get; set; }
+        public int IdOption { get; set; }
 
         //Relationships
-        public int IdOption { get; set; }
-        [ForeignKey("IdOption")]
-        public Option Option { get; set; }
+        public int IdNiveau { get; set; }
+        [ForeignKey("IdNiveau")]
+        public virtual Niveau Niveau { get; set; }
 
-        public List<ApplicationUser> Etudiants{ get; set; }
-        public List<Seance> Seances { get; set; }
+        public List<Groupe> Groupes { get; set; }
     }
 }

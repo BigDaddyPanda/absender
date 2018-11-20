@@ -1,5 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -11,24 +10,27 @@ namespace AbsenderAPI.Models.UniversityModels
     public class Seance
     {
         [Key]
-        public int IdSseance { get; set; }
-        public int HeureSeance { get; set; }
-        [JsonIgnore]
-        public int IdFiliere { get; set; }
-        [JsonIgnore]
+        public int IdSeance { get; set; }
+        /**
+         * Ce modèle relie le triplet ( Enseignant, Matière, Groupe )
+         * Pour l'absence, cette entité refere l'information du triplet precedent.
+         * Ainsi le modèle absence contiendra de plus la date précise
+         */
+
+        //RS
+        public string IdEnseignant { get; set; }
+        [ForeignKey("IdEnseignant")]
+        public ApplicationUser Enseignant { get; set; }
+
+        public int IdMatiere { get; set; }
+        [ForeignKey("IdMatiere")]
+        public Matiere Matiere { get; set; }
+
+        public int IdGroupe { get; set; }
         [ForeignKey("IdGroupe")]
-        public Groupe GroupeSeance { get; set; }
+        public Groupe Groupe { get; set; }
+        //Toute absence ayant cette seance 
+        public List<Absence> Absences { get; set; }
 
-        [JsonIgnore]
-        public string IdProfesseur{ get; set; }
-        [JsonIgnore]
-        [ForeignKey("IdProfesseur")]
-        public ApplicationUser ProfesseurSeance { get; set; }
-
-        [JsonIgnore]
-        public int IdSalle { get; set; }
-        [JsonIgnore]
-        [ForeignKey("IdSalle")]
-        public Salle SalleSeance { get; set; }
     }
 }

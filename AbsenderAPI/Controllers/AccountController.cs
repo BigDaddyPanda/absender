@@ -224,7 +224,7 @@ namespace AbsenderAPI.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var contact = new Contact { IdContact = 1, TypeContact = "TypeContact0", ValeurContact = "ValeurContact0", ClassificationContact = "ClassificationContact0" };
+                //var contact = new Contact { IdContact = 1, TypeContact = "TypeContact0", ValeurContact = "ValeurContact0", ClassificationContact = "ClassificationContact0" };
                 var user = new ApplicationUser { UserName = model.UserName, Email = model.Email, IdContact = 1 };
 
                 var result = await _userManager.CreateAsync(user, model.Password);

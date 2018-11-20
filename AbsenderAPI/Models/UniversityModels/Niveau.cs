@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace AbsenderAPI.Models.UniversityModels
 {
-    public class Salle
+    public class Niveau
     {
         [Key]
-        public int IdSalle { get; set; }
-        public string DesignationSalle { get; set; }
+        public int IdNiveau { get; set; }
 
+        //Relationships
+        public List<Option> niveauoptions { get; set; }
     }
 }

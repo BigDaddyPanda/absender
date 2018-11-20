@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,8 +11,13 @@ namespace AbsenderAPI.Models.UniversityModels
     {
         [Key]
         public int IdContact { get; set; }
-        public string TypeContact { get; set; }
-        public string ValeurContact { get; set; }
-        public string ClassificationContact { get; set; }
+
+
+
+        //RS
+        public string IdUser { get; set; }
+        [ForeignKey("IdUser")]
+        public ApplicationUser User { get; set; }
+
     }
 }
