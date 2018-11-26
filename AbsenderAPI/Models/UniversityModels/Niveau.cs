@@ -10,8 +10,11 @@ namespace AbsenderAPI.Models.UniversityModels
     {
         [Key]
         public int IdNiveau { get; set; }
+        public string DesignationNiveau{ get; set; }
+        public string TagNiveau { get; set; }
+
 
         //Relationships
-        public List<Option> niveauoptions { get; set; }
+        public List<Option> Niveauoptions { get; set; }
     }
 }

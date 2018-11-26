@@ -11,7 +11,8 @@ namespace AbsenderAPI.Models.UniversityModels
     {
         [Key]
         public int IdContact { get; set; }
-
+        public string Designation { get; set; }
+        public string Valeur { get; set; }
 
 
         //RS

@@ -11,6 +11,12 @@ namespace AbsenderAPI.Models.UniversityModels
     {
         [Key]
         public int IdMatiere { get; set; }
+        public string DesignationMatiere { get; set; }
+        public string TagMatiere { get; set; }
+        public int Coefficient { get; set; }
+
+        public decimal VolumeHoraire { get; set; }
+        public decimal TauxTolere { get; set; }
         //RS
         public int IdPanier { get; set; }
         [ForeignKey("IdPanier")]

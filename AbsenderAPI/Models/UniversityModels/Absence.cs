@@ -11,7 +11,8 @@ namespace AbsenderAPI.Models.UniversityModels
     {
         [Key]
         public int IdAbsence { get; set; }
-
+        public string JustificatifAbsence { get; set; }
+        public DateTime DateAbsence { get; set; }
 
         //RS
         public string IdEtudiant { get; set; }

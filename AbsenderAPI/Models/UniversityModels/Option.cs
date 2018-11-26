@@ -11,6 +11,8 @@ namespace AbsenderAPI.Models.UniversityModels
     {
         [Key]
         public int IdOption { get; set; }
+        public string DesignationOption { get; set; }
+        public string TagOption { get; set; }
 
         //Relationships
         public int IdNiveau { get; set; }

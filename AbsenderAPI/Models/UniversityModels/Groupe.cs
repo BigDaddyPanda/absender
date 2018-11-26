@@ -11,6 +11,8 @@ namespace AbsenderAPI.Models.UniversityModels
     {
         [Key]
         public int IdGroupe { get; set; }
+        public string Designation { get; set; }
+        public bool EstCoursJour { get; set; } = true;
 
         //Relationships
         public int IdOption { get; set; }

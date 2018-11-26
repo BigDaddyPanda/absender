@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using AbsenderAPI.Models;
 using AbsenderAPI.Models.UniversityModels;
-using AbsenderAPI.Models.AccountViewModels;
 
 namespace AbsenderAPI.Data
 {
@@ -25,21 +24,23 @@ namespace AbsenderAPI.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
 
-        public DbSet<AbsenderAPI.Models.UniversityModels.Absence> Absence { get; set; }
+        public DbSet<Absence> Absence { get; set; }
 
-        public DbSet<AbsenderAPI.Models.UniversityModels.Contact> Contact { get; set; }
+        public DbSet<Contact> Contact { get; set; }
 
-        public DbSet<AbsenderAPI.Models.UniversityModels.Groupe> Groupe { get; set; }
+        public DbSet<Groupe> Groupe { get; set; }
 
-        public DbSet<AbsenderAPI.Models.UniversityModels.Matiere> Matiere { get; set; }
+        public DbSet<Matiere> Matiere { get; set; }
 
-        public DbSet<AbsenderAPI.Models.UniversityModels.Niveau> Niveau { get; set; }
+        public DbSet<Niveau> Niveau { get; set; }
 
-        public DbSet<AbsenderAPI.Models.UniversityModels.Option> Option { get; set; }
+        public DbSet<Option> Option { get; set; }
 
-        public DbSet<AbsenderAPI.Models.UniversityModels.Panier> Panier { get; set; }
+        public DbSet<Panier> Panier { get; set; }
 
-        public DbSet<AbsenderAPI.Models.UniversityModels.Seance> Seance { get; set; }
+        public DbSet<Seance> Seance { get; set; }
+
+        public DbSet<TempsSeance> TempsSeance { get; set; }
 
 
     }

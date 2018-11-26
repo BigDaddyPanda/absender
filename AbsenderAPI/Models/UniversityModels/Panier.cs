@@ -10,7 +10,8 @@ namespace AbsenderAPI.Models.UniversityModels
     {
         [Key]
         public int IdPanier { get; set; }
-
+        public string DesignationPanier { get; set; }
+        public string TagPanier { get; set; }
 
         public List<Matiere> Matieres { get; set; }
     }

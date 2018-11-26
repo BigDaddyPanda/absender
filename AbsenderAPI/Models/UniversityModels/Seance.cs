@@ -16,6 +16,14 @@ namespace AbsenderAPI.Models.UniversityModels
          * Pour l'absence, cette entité refere l'information du triplet precedent.
          * Ainsi le modèle absence contiendra de plus la date précise
          */
+        //0900
+        public string TempsDebut { get; set; }
+        [ForeignKey("TempsDebut")]
+        public virtual TempsSeance Debut { get; set; }
+        //13:15
+        public string TempssFin { get; set; }
+        [ForeignKey("TempssFin")]
+        public virtual TempsSeance Fin { get; set; }
 
         //RS
         public string IdEnseignant { get; set; }
