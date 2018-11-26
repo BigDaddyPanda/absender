@@ -1,12 +1,12 @@
 ﻿using AbsenderAPI.Data;
 using AbsenderAPI.Models.UniversityModels;
-using System.Threading.Tasks;
+using System.Linq;
 
 namespace AbsenderAPI.Services
 {
-    public class FeaturedSeeds:IFeaturedSeeds
+    public class FeaturedSeeds : IFeaturedSeeds
     {
-        public ApplicationDbContext _dbContext { get; set; }
+        private ApplicationDbContext _dbContext { get; set; }
         public FeaturedSeeds(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -29,6 +29,14 @@ namespace AbsenderAPI.Services
 
         public void SeedData()
         {
+            foreach (var item in Seances)
+            {
+                _dbContext.TempsSeance.Add(new TempsSeance()
+                {
+                    RepresentationHHMM = item
+                });
+            }
+            _dbContext.SaveChanges();
         }
     }
 }
