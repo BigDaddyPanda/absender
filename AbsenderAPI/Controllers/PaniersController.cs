@@ -21,6 +21,10 @@ namespace AbsenderAPI.Controllers
             _context = context;
         }
 
+        [HttpGet("index")]
+        public IActionResult Index() { 
+            return View();
+        }
         // GET: api/Paniers
         [HttpGet]
         public IEnumerable<Panier> GetPanier()

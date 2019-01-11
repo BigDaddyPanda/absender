@@ -11,16 +11,16 @@ namespace AbsenderAPI.Models.UniversityModels
     {
         [Key]
         public int IdAbsence { get; set; }
-        public string JustificatifAbsence { get; set; }
-        public DateTime DateAbsence { get; set; }
+        public string JustificatifAbsence { get; set; } = "aucun";
+        public DateTime DateAbsence { get; set; } = DateTime.Now;
 
         //RS
         public string IdEtudiant { get; set; }
         [ForeignKey("IdEtudiant")]
-        public ApplicationUser Etudiant { get; set; }
+        public virtual ApplicationUser Etudiant { get; set; }
 
         public int IdSeance { get; set; }
         [ForeignKey("IdSeance")]
-        public Seance Seance { get; set; }
+        public virtual Seance Seance { get; set; }
     }
 }

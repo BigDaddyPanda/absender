@@ -11,8 +11,8 @@ using System;
 namespace AbsenderAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20181120211619_initialize")]
-    partial class initialize
+    [Migration("20181128091610_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -92,9 +92,13 @@ namespace AbsenderAPI.Migrations
                     b.Property<int>("IdAbsence")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("DateAbsence");
+
                     b.Property<string>("IdEtudiant");
 
                     b.Property<int>("IdSeance");
+
+                    b.Property<string>("JustificatifAbsence");
 
                     b.HasKey("IdAbsence");
 
@@ -110,7 +114,11 @@ namespace AbsenderAPI.Migrations
                     b.Property<int>("IdContact")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Designation");
+
                     b.Property<string>("IdUser");
+
+                    b.Property<string>("Valeur");
 
                     b.HasKey("IdContact");
 
@@ -123,6 +131,10 @@ namespace AbsenderAPI.Migrations
                 {
                     b.Property<int>("IdGroupe")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Designation");
+
+                    b.Property<bool>("EstCoursJour");
 
                     b.Property<int>("IdOption");
 
@@ -138,7 +150,17 @@ namespace AbsenderAPI.Migrations
                     b.Property<int>("IdMatiere")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int>("Coefficient");
+
+                    b.Property<string>("DesignationMatiere");
+
                     b.Property<int>("IdPanier");
+
+                    b.Property<string>("TagMatiere");
+
+                    b.Property<decimal>("TauxTolere");
+
+                    b.Property<decimal>("VolumeHoraire");
 
                     b.HasKey("IdMatiere");
 
@@ -152,6 +174,10 @@ namespace AbsenderAPI.Migrations
                     b.Property<int>("IdNiveau")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("DesignationNiveau");
+
+                    b.Property<string>("TagNiveau");
+
                     b.HasKey("IdNiveau");
 
                     b.ToTable("Niveau");
@@ -162,7 +188,11 @@ namespace AbsenderAPI.Migrations
                     b.Property<int>("IdOption")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("DesignationOption");
+
                     b.Property<int>("IdNiveau");
+
+                    b.Property<string>("TagOption");
 
                     b.HasKey("IdOption");
 
@@ -175,6 +205,10 @@ namespace AbsenderAPI.Migrations
                 {
                     b.Property<int>("IdPanier")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<string>("DesignationPanier");
+
+                    b.Property<string>("TagPanier");
 
                     b.HasKey("IdPanier");
 
@@ -192,6 +226,10 @@ namespace AbsenderAPI.Migrations
 
                     b.Property<int>("IdMatiere");
 
+                    b.Property<string>("TempsDebut");
+
+                    b.Property<string>("TempsFin");
+
                     b.HasKey("IdSeance");
 
                     b.HasIndex("IdEnseignant");
@@ -200,7 +238,21 @@ namespace AbsenderAPI.Migrations
 
                     b.HasIndex("IdMatiere");
 
+                    b.HasIndex("TempsDebut");
+
+                    b.HasIndex("TempsFin");
+
                     b.ToTable("Seance");
+                });
+
+            modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.TempsSeance", b =>
+                {
+                    b.Property<string>("RepresentationHHMM")
+                        .ValueGeneratedOnAdd();
+
+                    b.HasKey("RepresentationHHMM");
+
+                    b.ToTable("TempsSeance");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -361,7 +413,7 @@ namespace AbsenderAPI.Migrations
             modelBuilder.Entity("AbsenderAPI.Models.UniversityModels.Option", b =>
                 {
                     b.HasOne("AbsenderAPI.Models.UniversityModels.Niveau", "Niveau")
-                        .WithMany("niveauoptions")
+                        .WithMany("Niveauoptions")
                         .HasForeignKey("IdNiveau")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -381,6 +433,14 @@ namespace AbsenderAPI.Migrations
                         .WithMany("Seances")
                         .HasForeignKey("IdMatiere")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("AbsenderAPI.Models.UniversityModels.TempsSeance", "Debut")
+                        .WithMany()
+                        .HasForeignKey("TempsDebut");
+
+                    b.HasOne("AbsenderAPI.Models.UniversityModels.TempsSeance", "Fin")
+                        .WithMany()
+                        .HasForeignKey("TempsFin");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

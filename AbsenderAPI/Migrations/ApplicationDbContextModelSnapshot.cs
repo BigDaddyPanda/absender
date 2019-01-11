@@ -227,7 +227,7 @@ namespace AbsenderAPI.Migrations
 
                     b.Property<string>("TempsDebut");
 
-                    b.Property<string>("TempssFin");
+                    b.Property<string>("TempsFin");
 
                     b.HasKey("IdSeance");
 
@@ -239,7 +239,7 @@ namespace AbsenderAPI.Migrations
 
                     b.HasIndex("TempsDebut");
 
-                    b.HasIndex("TempssFin");
+                    b.HasIndex("TempsFin");
 
                     b.ToTable("Seance");
                 });
@@ -439,7 +439,7 @@ namespace AbsenderAPI.Migrations
 
                     b.HasOne("AbsenderAPI.Models.UniversityModels.TempsSeance", "Fin")
                         .WithMany()
-                        .HasForeignKey("TempssFin");
+                        .HasForeignKey("TempsFin");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

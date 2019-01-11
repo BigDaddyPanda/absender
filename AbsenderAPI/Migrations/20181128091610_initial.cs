@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace AbsenderAPI.Migrations
 {
-    public partial class initialize : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -28,7 +28,9 @@ namespace AbsenderAPI.Migrations
                 columns: table => new
                 {
                     IdNiveau = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DesignationNiveau = table.Column<string>(nullable: true),
+                    TagNiveau = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -40,11 +42,24 @@ namespace AbsenderAPI.Migrations
                 columns: table => new
                 {
                     IdPanier = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DesignationPanier = table.Column<string>(nullable: true),
+                    TagPanier = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Panier", x => x.IdPanier);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TempsSeance",
+                columns: table => new
+                {
+                    RepresentationHHMM = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TempsSeance", x => x.RepresentationHHMM);
                 });
 
             migrationBuilder.CreateTable(
@@ -74,7 +89,9 @@ namespace AbsenderAPI.Migrations
                 {
                     IdOption = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    IdNiveau = table.Column<int>(nullable: false)
+                    DesignationOption = table.Column<string>(nullable: true),
+                    IdNiveau = table.Column<int>(nullable: false),
+                    TagOption = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -93,7 +110,12 @@ namespace AbsenderAPI.Migrations
                 {
                     IdMatiere = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    IdPanier = table.Column<int>(nullable: false)
+                    Coefficient = table.Column<int>(nullable: false),
+                    DesignationMatiere = table.Column<string>(nullable: true),
+                    IdPanier = table.Column<int>(nullable: false),
+                    TagMatiere = table.Column<string>(nullable: true),
+                    TauxTolere = table.Column<decimal>(nullable: false),
+                    VolumeHoraire = table.Column<decimal>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -112,6 +134,8 @@ namespace AbsenderAPI.Migrations
                 {
                     IdGroupe = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Designation = table.Column<string>(nullable: true),
+                    EstCoursJour = table.Column<bool>(nullable: false),
                     IdOption = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -149,8 +173,10 @@ namespace AbsenderAPI.Migrations
                 {
                     IdAbsence = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    DateAbsence = table.Column<DateTime>(nullable: false),
                     IdEtudiant = table.Column<string>(nullable: true),
-                    IdSeance = table.Column<int>(nullable: false)
+                    IdSeance = table.Column<int>(nullable: false),
+                    JustificatifAbsence = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -206,7 +232,9 @@ namespace AbsenderAPI.Migrations
                 {
                     IdContact = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    IdUser = table.Column<string>(nullable: true)
+                    Designation = table.Column<string>(nullable: true),
+                    IdUser = table.Column<string>(nullable: true),
+                    Valeur = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -263,7 +291,9 @@ namespace AbsenderAPI.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     IdEnseignant = table.Column<string>(nullable: true),
                     IdGroupe = table.Column<int>(nullable: false),
-                    IdMatiere = table.Column<int>(nullable: false)
+                    IdMatiere = table.Column<int>(nullable: false),
+                    TempsDebut = table.Column<string>(nullable: true),
+                    TempsFin = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -286,6 +316,18 @@ namespace AbsenderAPI.Migrations
                         principalTable: "Matiere",
                         principalColumn: "IdMatiere",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Seance_TempsSeance_TempsDebut",
+                        column: x => x.TempsDebut,
+                        principalTable: "TempsSeance",
+                        principalColumn: "RepresentationHHMM",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Seance_TempsSeance_TempsFin",
+                        column: x => x.TempsFin,
+                        principalTable: "TempsSeance",
+                        principalColumn: "RepresentationHHMM",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -383,6 +425,16 @@ namespace AbsenderAPI.Migrations
                 table: "Seance",
                 column: "IdMatiere");
 
+            migrationBuilder.CreateIndex(
+                name: "IX_Seance_TempsDebut",
+                table: "Seance",
+                column: "TempsDebut");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Seance_TempsFin",
+                table: "Seance",
+                column: "TempsFin");
+
             migrationBuilder.AddForeignKey(
                 name: "FK_AspNetUserRoles_AspNetUsers_UserId",
                 table: "AspNetUserRoles",
@@ -472,6 +524,9 @@ namespace AbsenderAPI.Migrations
 
             migrationBuilder.DropTable(
                 name: "Matiere");
+
+            migrationBuilder.DropTable(
+                name: "TempsSeance");
 
             migrationBuilder.DropTable(
                 name: "Panier");

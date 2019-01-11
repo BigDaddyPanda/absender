@@ -5,6 +5,11 @@
     <UserSecretsId>aspnet-AbsenderAPI-26151DFE-42A2-42BA-959A-008FC68E7A75</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\20181126111253_hotfix.cs" />
+    <Compile Remove="Migrations\20181126111253_hotfix.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
@@ -20,7 +25,7 @@
 
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Models\UniversityViewModels\" />
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

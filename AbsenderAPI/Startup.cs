@@ -77,6 +77,7 @@ namespace AbsenderAPI
             // Add application services.
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddScoped<IRoleManagement, RoleManangement>();
+            services.AddScoped<IFeaturedSeeds, FeaturedSeeds>();
 
             services.AddMvc().AddJsonOptions(options =>
             {
@@ -86,7 +87,7 @@ namespace AbsenderAPI
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IRoleManagement roleManagement)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, IRoleManagement roleManagement, IFeaturedSeeds featuredSeeds)
         {
             if (env.IsDevelopment())
             {
@@ -114,7 +115,9 @@ namespace AbsenderAPI
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
             roleManagement.Initialize();
-           
+            featuredSeeds.SeedData();
+
+
         }
     }
 }

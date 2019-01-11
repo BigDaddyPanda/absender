@@ -21,8 +21,8 @@ namespace AbsenderAPI.Models.UniversityModels
         [ForeignKey("TempsDebut")]
         public virtual TempsSeance Debut { get; set; }
         //13:15
-        public string TempssFin { get; set; }
-        [ForeignKey("TempssFin")]
+        public string TempsFin { get; set; }
+        [ForeignKey("TempsFin")]
         public virtual TempsSeance Fin { get; set; }
 
         //RS

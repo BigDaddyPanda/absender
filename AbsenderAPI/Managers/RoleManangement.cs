@@ -30,7 +30,6 @@ namespace AbsenderAPI.Managers
             {
                 //create database schema if none exists
                 var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
-                context.Database.EnsureCreated();
                 var _roleManager = serviceScope.ServiceProvider.GetService<RoleManager<IdentityRole>>();
                 foreach (var role in Enum.GetNames(typeof(Roles)))
                 {
