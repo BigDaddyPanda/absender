@@ -1,28 +1,24 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { createBrowserHistory } from "history";
-import { Router, Route, Switch } from "react-router-dom";
-import { Provider } from 'react-redux';
+import { Router, Route, Switch, Redirect } from "react-router-dom";
 
-import { store } from './_helpers';
+import AdminLayout from "layouts/Admin/Admin.jsx";
+import RTLLayout from "layouts/RTL/RTL.jsx";
 
-import "bootstrap/dist/css/bootstrap.css";
-import "assets/scss/now-ui-dashboard.css";
-import "assets/css/demo.css";
-
-import indexRoutes from "routes/index.jsx";
+import "assets/scss/black-dashboard-react.scss";
+import "assets/demo/demo.css";
+import "assets/css/nucleo-icons.css";
 
 const hist = createBrowserHistory();
 
 ReactDOM.render(
-  <Provider store={store}>
-    <Router history={hist}>
-      <Switch>
-        {indexRoutes.map((prop, key) => {
-          return <Route path={prop.path} key={key} component={prop.component} />;
-        })}
-      </Switch>
-    </Router>
-  </Provider>,
+  <Router history={hist}>
+    <Switch>
+      <Route path="/admin" render={props => <AdminLayout {...props} />} />
+      <Route path="/rtl" render={props => <RTLLayout {...props} />} />
+      <Redirect from="/" to="/admin/dashboard" />
+    </Switch>
+  </Router>,
   document.getElementById("root")
 );
