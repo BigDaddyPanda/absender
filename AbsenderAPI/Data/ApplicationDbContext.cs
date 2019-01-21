@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using AbsenderAPI.Models;
 using AbsenderAPI.Models.UniversityModels;
+using AbsenderAPI.Models.UniversityModels.Users;
 
 namespace AbsenderAPI.Data
 {
@@ -25,24 +26,15 @@ namespace AbsenderAPI.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
 
-        public DbSet<Absence> Absence { get; set; }
-
-        public DbSet<Contact> Contact { get; set; }
-
+        public DbSet<Diplome> Diplome { get; set; }
+        public DbSet<Filiere> Filiere { get; set; }
         public DbSet<Groupe> Groupe { get; set; }
-
+        public DbSet<Module> Module { get; set; }
+        public DbSet<Etudiant> Etudiant { get; set; }
         public DbSet<Matiere> Matiere { get; set; }
-
-        public DbSet<Niveau> Niveau { get; set; }
-
-        public DbSet<Option> Option { get; set; }
-
-        public DbSet<Panier> Panier { get; set; }
-
+        public DbSet<Professeur> Professeur { get; set; }
         public DbSet<Seance> Seance { get; set; }
-
-        public DbSet<TempsSeance> TempsSeance { get; set; }
-
+        public DbSet<Absence> Absence { get; set; }
 
     }
 }

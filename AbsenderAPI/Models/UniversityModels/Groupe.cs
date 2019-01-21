@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AbsenderAPI.Models.UniversityModels.Users;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -10,16 +11,14 @@ namespace AbsenderAPI.Models.UniversityModels
     public class Groupe
     {
         [Key]
-        public int IdGroupe { get; set; }
-        public string Designation { get; set; }
-        public bool EstCoursJour { get; set; } = true;
+        public int Id_groupe { get; set; }
+        public string Designation_groupe { get; set; }
 
-        //Relationships
-        public int IdOption { get; set; }
-        [ForeignKey("IdOption")]
-        public Option Option { get; set; }
+        public int Fk_filiere { get; set; }
+        [ForeignKey("fk_filiere")]
+        public Filiere Ref_filiere { get; set; }
 
-        public List<ApplicationUser> Etudiants{ get; set; }
-        public List<Seance> Seances { get; set; }
+        public List<Etudiant> Liste_Etudiants { get; set; }
+        public List<Seance> Emploie{ get; set; }
     }
 }

@@ -11,15 +11,15 @@ namespace AbsenderAPI.Services
     // For more details see https://go.microsoft.com/fwlink/?LinkID=532713
     public class EmailSender : IEmailSender
     {
-        private SmtpClient client;
+        private SmtpClient Client;
         private bool initialized;
         private void InitializeConnexion()
         {
 
-            client = new SmtpClient("smtp.gmail.com", 587);
-            client.UseDefaultCredentials = false;
-            client.EnableSsl = true;
-            client.Credentials = new NetworkCredential("tekupabsender@gmail.com", "@Absender123");
+            Client = new SmtpClient("smtp.gmail.com", 587);
+            Client.UseDefaultCredentials = false;
+            Client.EnableSsl = true;
+            Client.Credentials = new NetworkCredential("tekupabsender@gmail.com", "@Absender123");
             initialized = true;
         }
 
@@ -35,12 +35,12 @@ namespace AbsenderAPI.Services
                 mailMessage.Subject = subject;
                 mailMessage.IsBodyHtml = true;
                 mailMessage.Body = message;
-                client.Send(mailMessage);
+                Client.Send(mailMessage);
 
             }
-            catch
+            catch(Exception e)
             {
-                Console.WriteLine("CC");
+                Console.WriteLine(">>"+e.Message);
             }
             return Task.CompletedTask;
         }

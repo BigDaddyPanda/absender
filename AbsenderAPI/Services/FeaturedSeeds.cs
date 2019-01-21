@@ -29,14 +29,7 @@ namespace AbsenderAPI.Services
 
         public void SeedData()
         {
-            foreach (var item in Seances)
-            {
-                _dbContext.TempsSeance.Add(new TempsSeance()
-                {
-                    RepresentationHHMM = item
-                });
-            }
-            _dbContext.SaveChanges();
+            throw new System.NotImplementedException();
         }
     }
 }
