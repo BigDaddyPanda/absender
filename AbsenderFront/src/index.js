@@ -12,10 +12,11 @@ import "assets/scss/black-dashboard-react.scss";
 import "assets/demo/demo.css";
 import "assets/css/nucleo-icons.css";
 
+import { Provider } from 'react-redux';
+import { store } from './redux/_helpers';
 /**
  * Initializing function
  */
-ReactDOM.render( <
-  App / > ,
+ReactDOM.render( <Provider store={store}><App/></Provider>,
   document.getElementById("root")
 );

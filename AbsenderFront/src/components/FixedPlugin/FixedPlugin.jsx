@@ -2,6 +2,8 @@ import React, { Component } from "react";
 
 // reactstrap components
 import { Button } from "reactstrap";
+import { connect } from 'react-redux'
+import { mapStateToProps, multipleActionsMapDispatchToProps } from "../../redux/_helpers";
 
 class FixedPlugin extends Component {
   constructor(props) {
@@ -122,5 +124,5 @@ class FixedPlugin extends Component {
     );
   }
 }
-
-export default FixedPlugin;
+const connectedFixedPlugin = connect(mapStateToProps, multipleActionsMapDispatchToProps([]))(FixedPlugin);
+export { connectedFixedPlugin as FixedPlugin };

@@ -41,6 +41,8 @@ class Sidebar extends React.Component {
     const { bgColor, routes, rtlActive, logo } = this.props;
     let logoImg = null;
     let logoText = null;
+    console.log(routes);
+    
     if (logo !== undefined) {
       if (logo.outterLink !== undefined) {
         logoImg = (
