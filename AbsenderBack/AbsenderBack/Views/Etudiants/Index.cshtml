@@ -1,0 +1,95 @@
+﻿@model IEnumerable<AbsenderAPI.Models.UniversityModels.Users.Etudiant>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.ContactParent)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ref_Groupe)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdNational)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.IdUniversitaire)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PhotoProfil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fichier_Profil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Standarized_Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hash_Password)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email_Confirm)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Connect)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactParent)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_Groupe.Id_groupe)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdNational)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdUniversitaire)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhotoProfil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fichier_Profil)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Standarized_Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hash_Password)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email_Confirm)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Connect)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id_Utilisateur">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id_Utilisateur">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id_Utilisateur">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

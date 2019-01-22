@@ -1,0 +1,59 @@
+﻿@model IEnumerable<AbsenderAPI.Models.UniversityModels.Seance>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Start_Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.End_Time)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ref_Matiere)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ref_Professeur)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ref_Groupe)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Start_Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.End_Time)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_Matiere.Id_Matiere)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_Professeur.Id_Utilisateur)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Ref_Groupe.Id_groupe)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id_Seance">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id_Seance">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id_Seance">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

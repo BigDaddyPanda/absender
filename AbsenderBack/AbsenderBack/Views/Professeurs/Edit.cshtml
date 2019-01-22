@@ -1,0 +1,83 @@
+﻿@model AbsenderAPI.Models.UniversityModels.Users.Professeur
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Professeur</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Domaine" class="control-label"></label>
+                <input asp-for="Domaine" class="form-control" />
+                <span asp-validation-for="Domaine" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="Id_Utilisateur" />
+            <div class="form-group">
+                <label asp-for="IdNational" class="control-label"></label>
+                <input asp-for="IdNational" class="form-control" />
+                <span asp-validation-for="IdNational" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="IdUniversitaire" class="control-label"></label>
+                <input asp-for="IdUniversitaire" class="form-control" />
+                <span asp-validation-for="IdUniversitaire" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PhotoProfil" class="control-label"></label>
+                <input asp-for="PhotoProfil" class="form-control" />
+                <span asp-validation-for="PhotoProfil" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fichier_Profil" class="control-label"></label>
+                <input asp-for="Fichier_Profil" class="form-control" />
+                <span asp-validation-for="Fichier_Profil" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Email" class="control-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Standarized_Email" class="control-label"></label>
+                <input asp-for="Standarized_Email" class="form-control" />
+                <span asp-validation-for="Standarized_Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hash_Password" class="control-label"></label>
+                <input asp-for="Hash_Password" class="form-control" />
+                <span asp-validation-for="Hash_Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Email_Confirm" /> @Html.DisplayNameFor(model => model.Email_Confirm)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="checkbox">
+                    <label>
+                        <input asp-for="Connect" /> @Html.DisplayNameFor(model => model.Connect)
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

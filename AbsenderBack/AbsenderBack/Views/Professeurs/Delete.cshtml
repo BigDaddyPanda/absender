@@ -1,0 +1,81 @@
+﻿@model AbsenderAPI.Models.UniversityModels.Users.Professeur
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Professeur</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Domaine)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Domaine)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdNational)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdNational)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdUniversitaire)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdUniversitaire)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PhotoProfil)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PhotoProfil)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Fichier_Profil)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Fichier_Profil)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Standarized_Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Standarized_Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Hash_Password)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Hash_Password)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email_Confirm)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email_Confirm)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Connect)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Connect)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id_Utilisateur" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

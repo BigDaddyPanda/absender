@@ -1,0 +1,48 @@
+﻿@model AbsenderAPI.Models.UniversityModels.Absence
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Absence</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Justificatif)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Justificatif)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Date_sauvegarde)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Date_sauvegarde)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EstAbsent)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EstAbsent)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Etudiant)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Etudiant.Id_Utilisateur)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Seance)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Seance.Id_Seance)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id_Absence">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

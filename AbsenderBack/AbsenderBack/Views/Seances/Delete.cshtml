@@ -1,0 +1,51 @@
+﻿@model AbsenderAPI.Models.UniversityModels.Seance
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Seance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Start_Time)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Start_Time)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.End_Time)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.End_Time)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Matiere)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Matiere.Id_Matiere)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Professeur)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Professeur.Id_Utilisateur)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Groupe)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Groupe.Id_groupe)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id_Seance" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

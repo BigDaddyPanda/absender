@@ -1,0 +1,48 @@
+﻿@model AbsenderAPI.Models.UniversityModels.Seance
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Seance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Start_Time)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Start_Time)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.End_Time)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.End_Time)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Matiere)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Matiere.Id_Matiere)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Professeur)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Professeur.Id_Utilisateur)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Groupe)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Groupe.Id_groupe)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id_Seance">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

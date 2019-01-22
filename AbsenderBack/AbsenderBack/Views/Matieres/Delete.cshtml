@@ -1,0 +1,45 @@
+﻿@model AbsenderAPI.Models.UniversityModels.Matiere
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Matiere</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Designation_Matiere)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Designation_Matiere)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Coefficient)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Coefficient)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Limite_Absence)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Limite_Absence)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Module)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Module.Id_Module)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id_Matiere" />
+        <input type="submit" value="Delete" class="btn btn-default" /> |
+        <a asp-action="Index">Back to List</a>
+    </form>
+</div>

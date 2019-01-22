@@ -1,0 +1,49 @@
+﻿@model AbsenderAPI.Models.UniversityModels.Filiere
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h4>Filiere</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id_Filiere" />
+            <div class="form-group">
+                <label asp-for="Designation_Niveau" class="control-label"></label>
+                <input asp-for="Designation_Niveau" class="form-control" />
+                <span asp-validation-for="Designation_Niveau" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Designation_Filiere" class="control-label"></label>
+                <input asp-for="Designation_Filiere" class="form-control" />
+                <span asp-validation-for="Designation_Filiere" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Designation_Option" class="control-label"></label>
+                <input asp-for="Designation_Option" class="form-control" />
+                <span asp-validation-for="Designation_Option" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fk_Diplome" class="control-label"></label>
+                <select asp-for="Fk_Diplome" class="form-control" asp-items="ViewBag.Fk_Diplome"></select>
+                <span asp-validation-for="Fk_Diplome" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

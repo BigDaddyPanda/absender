@@ -1,0 +1,42 @@
+﻿@model AbsenderAPI.Models.UniversityModels.Filiere
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Filiere</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Designation_Niveau)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Designation_Niveau)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Designation_Filiere)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Designation_Filiere)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Designation_Option)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Designation_Option)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Ref_Diplome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Ref_Diplome.Id_Diplome)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id_Filiere">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>
