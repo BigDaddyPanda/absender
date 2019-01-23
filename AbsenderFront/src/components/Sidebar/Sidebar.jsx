@@ -41,54 +41,54 @@ class Sidebar extends React.Component {
     const { bgColor, routes, rtlActive, logo } = this.props;
     let logoImg = null;
     let logoText = null;
-    console.log(routes);
-    
+
     if (logo !== undefined) {
-      if (logo.outterLink !== undefined) {
-        logoImg = (
-          <a
-            href={logo.outterLink}
-            className="simple-text logo-mini"
-            target="_blank"
-            onClick={this.props.toggleSidebar}
-          >
-            <div className="logo-img">
-              <img src={logo.imgSrc} alt="react-logo" />
-            </div>
-          </a>
-        );
-        logoText = (
-          <a
-            href={logo.outterLink}
-            className="simple-text logo-normal"
-            target="_blank"
-            onClick={this.props.toggleSidebar}
-          >
-            {logo.text}
-          </a>
-        );
-      } else {
-        logoImg = (
-          <Link
-            to={logo.innerLink}
-            className="simple-text logo-mini"
-            onClick={this.props.toggleSidebar}
-          >
-            <div className="logo-img">
-              <img src={logo.imgSrc} alt="react-logo" />
-            </div>
-          </Link>
-        );
-        logoText = (
-          <Link
-            to={logo.innerLink}
-            className="simple-text logo-normal"
-            onClick={this.props.toggleSidebar}
-          >
-            {logo.text}
-          </Link>
-        );
-      }
+      // if (logo.outterLink !== undefined) {
+      //   logoImg = (
+      //     <a
+      //       href={logo.outterLink}
+      //       className="simple-text logo-mini"
+      //       target="_blank"
+      //       onClick={this.props.toggleSidebar}
+      //     >
+      //       <div className="logo-img">
+      //         <img src={logo.imgSrc} alt="react-logo" />
+      //       </div>
+      //     </a>
+      //   );
+      //   logoText = (
+      //     <a
+      //       href={logo.outterLink}
+      //       className="simple-text logo-normal"
+      //       target="_blank"
+      //       onClick={this.props.toggleSidebar}
+      //     >
+      //       {logo.text}
+      //     </a>
+      //   );
+      // } else
+
+      logoImg = (
+        <Link
+          to={logo.outterLink}
+          className="simple-text logo-mini"
+          onClick={this.props.toggleSidebar}
+        >
+          <div className="logo-img">
+            <img src={logo.imgSrc} alt="react-logo" />
+          </div>
+        </Link>
+      );
+      logoText = (
+        <Link
+          to={logo.outterLink}
+          className="simple-text logo-normal"
+          onClick={this.props.toggleSidebar}
+        >
+          {"Espace Professeur"}
+        </Link>
+      );
+
     }
     return (
       <div className="sidebar" data={bgColor}>

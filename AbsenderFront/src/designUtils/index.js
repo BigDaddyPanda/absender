@@ -1,6 +1,6 @@
 import PerfectScrollbar from "perfect-scrollbar";
 
-export function getPerfectScrollBar(ps,mainPanel) {
+export function getPerfectScrollBar(ps, mainPanel) {
     if (navigator.platform.indexOf("Win") > -1) {
         document.documentElement.className += " perfect-scrollbar-on";
         document.documentElement.classList.remove("perfect-scrollbar-off");
@@ -14,10 +14,6 @@ export function getPerfectScrollBar(ps,mainPanel) {
     }
     return ps;
 }
-/**
- * 
- * @param {PerfectScrollbar} ps 
- */
 export function destroyPerfectScrollBar(ps) {
     if (navigator.platform.indexOf("Win") > -1) {
         ps.destroy();
@@ -27,7 +23,7 @@ export function destroyPerfectScrollBar(ps) {
     return ps;
 }
 
-export function updatePerfectScrollBar(ps,e,mainPanel) {
+export function updatePerfectScrollBar(ps, e, mainPanel) {
     if (e.history.action === "PUSH") {
         if (navigator.platform.indexOf("Win") > -1) {
             let tables = document.querySelectorAll(".table-responsive");

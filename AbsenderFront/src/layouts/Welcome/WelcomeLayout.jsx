@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { mapStateToProps, multipleActionsMapDispatchToProps } from '../../redux/_helpers';
+import { AuthForm } from '../../views/Welcome';
 
 class WelcomeLayout extends Component {
   render() {
     return (
       <div>
-        Welcome To App
+        <AuthForm />
       </div>
     )
   }

@@ -1,83 +1,123 @@
 import React, { Component } from 'react'
 import {
     Card,
-    CardHeader,
     CardBody,
     CardTitle,
-    Table,
+    Button,
+    ButtonGroup,
+    CardHeader,
     Row,
-    Col
+    Col,
 } from "reactstrap";
+import classNames from 'classnames'
 import { connect } from 'react-redux'
 import { multipleActionsMapDispatchToProps, mapStateToProps } from '../../redux/_helpers';
-
+import { AbsenderProfile, RowProfile } from '../StudentViews';
+import { getPerfectScrollBar, destroyPerfectScrollBar, updatePerfectScrollBar } from '../../designUtils';
+import { AbsenderList } from './AbsenderList';
+var ps;
 class StudentList extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            display_style: "full"
+        };
+    }
+    componentDidMount() {
+        ps = getPerfectScrollBar(ps, this.refs.mainPanelSt);
+    }
+    componentWillUnmount() {
+        ps = destroyPerfectScrollBar(ps);
+    }
+    componentDidUpdate(e) {
+        ps = updatePerfectScrollBar(ps, e, this.refs.mainPanelSt)
+    }
+
+    setDisplayType = name => {
+        this.setState({
+            display_style: name
+        });
+    };
     render() {
+        const { display_style } = this.state
         return (
             <>
-                <div className="content">
+                <div className="content" ref="mainPanelSt">
+
                     <Row>
-                        <Col md="12">
-                            <Card>
+                        <Col xs="12">
+                            <Card className="card-chart">
                                 <CardHeader>
-                                    <CardTitle tag="h4">Simple Table</CardTitle>
+                                    <Row>
+                                        <Col className="text-left" sm="6">
+                                            <h5 className="card-category">Liste de Presence</h5>
+                                            <CardTitle tag="h2">3 GL BD - A</CardTitle>
+                                        </Col>
+                                        <Col sm="6">
+                                            <ButtonGroup
+                                                className="btn-group-toggle float-right"
+                                                data-toggle="buttons"
+                                            >
+                                                <Button
+                                                    tag="label"
+                                                    className={classNames("btn-simple", {
+                                                        active: display_style === "full"
+                                                    })}
+                                                    color="info"
+                                                    id="0"
+                                                    size="sm"
+                                                    onClick={() => this.setDisplayType("full")}
+                                                >
+                                                    <input
+                                                        defaultChecked
+                                                        className="d-none"
+                                                        name="options"
+                                                        type="radio"
+                                                    />
+                                                    <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                                                        {`Full Mode`}
+                                                    </span>
+                                                    <span className="d-block d-sm-none">
+                                                        <i className="tim-icons icon-bullet-list-67" />
+                                                    </span>
+                                                </Button>
+                                                <Button
+                                                    color="info"
+                                                    id="1"
+                                                    size="sm"
+                                                    tag="label"
+                                                    className={classNames("btn-simple", {
+                                                        active: display_style === "absender"
+                                                    })}
+                                                    onClick={() => this.setDisplayType("absender")}
+                                                >
+                                                    <input
+                                                        className="d-none"
+                                                        name="options"
+                                                        type="radio"
+                                                    />
+                                                    <span className="d-none d-sm-block d-md-block d-lg-block d-xl-block">
+                                                        {`Absender Mode`}</span>
+                                                    <span className="d-block d-sm-none">
+                                                        <i className="tim-icons icon-single-02" />
+                                                    </span>
+                                                </Button>
+                                            </ButtonGroup>
+                                        </Col>
+                                    </Row>
                                 </CardHeader>
                                 <CardBody>
-                                    <Table className="tablesorter" responsive>
-                                        <thead className="text-primary">
-                                            <tr>
-                                                <th>Name</th>
-                                                <th>Country</th>
-                                                <th>City</th>
-                                                <th className="text-center">Salary</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Dakota Rice</td>
-                                                <td>Niger</td>
-                                                <td>Oud-Turnhout</td>
-                                                <td className="text-center">$36,738</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Minerva Hooper</td>
-                                                <td>Curaçao</td>
-                                                <td>Sinaai-Waas</td>
-                                                <td className="text-center">$23,789</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Sage Rodriguez</td>
-                                                <td>Netherlands</td>
-                                                <td>Baileux</td>
-                                                <td className="text-center">$56,142</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Philip Chaney</td>
-                                                <td>Korea, South</td>
-                                                <td>Overland Park</td>
-                                                <td className="text-center">$38,735</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Doris Greene</td>
-                                                <td>Malawi</td>
-                                                <td>Feldkirchen in Kärnten</td>
-                                                <td className="text-center">$63,542</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Mason Porter</td>
-                                                <td>Chile</td>
-                                                <td>Gloucester</td>
-                                                <td className="text-center">$78,615</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Jon Porter</td>
-                                                <td>Portugal</td>
-                                                <td>Gloucester</td>
-                                                <td className="text-center">$98,615</td>
-                                            </tr>
-                                        </tbody>
-                                    </Table>
+                                    {display_style === "absender" ? <AbsenderList /> : <RowProfile />}
                                 </CardBody>
+                                <CardBody>
+
+                                    <div className="text-right">
+                                        <input type="checkbox" />{" Je consigne avoir vérifié la Liste"}<br />
+                                        <Button className="ml-auto" color="success" size="sm" >Soumettre</Button>
+
+                                    </div>
+                                </CardBody>
+
                             </Card>
                         </Col>
                     </Row>

@@ -12,6 +12,7 @@ namespace AbsenderAPI.Models.UniversityModels
     {
         [Key]
         public int Id_Seance { get; set; }
+        public string Day_Of_The_Week { get; set; }
         public string Start_Time { get; set; }
         public string End_Time { get; set; }
 

@@ -61,7 +61,7 @@ namespace AbsenderBack.Controllers.ControllersWithView
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id_Seance,Start_Time,End_Time,Fk_Matiere,Fk_Professeur,Fk_Groupe")] Seance seance)
+        public async Task<IActionResult> Create([Bind("Id_Seance,Day_Of_The_Week,Start_Time,End_Time,Fk_Matiere,Fk_Professeur,Fk_Groupe")] Seance seance)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +99,7 @@ namespace AbsenderBack.Controllers.ControllersWithView
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id_Seance,Start_Time,End_Time,Fk_Matiere,Fk_Professeur,Fk_Groupe")] Seance seance)
+        public async Task<IActionResult> Edit(int id, [Bind("Id_Seance,Day_Of_The_Week,Start_Time,End_Time,Fk_Matiere,Fk_Professeur,Fk_Groupe")] Seance seance)
         {
             if (id != seance.Id_Seance)
             {

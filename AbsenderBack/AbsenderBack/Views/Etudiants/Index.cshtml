@@ -16,7 +16,8 @@
                 @Html.DisplayNameFor(model => model.ContactParent)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ref_Groupe)
+                @*@Html.DisplayNameFor(model => model.Ref_Groupe)*@
+                Groupe
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.IdNational)
@@ -24,21 +25,21 @@
             <th>
                 @Html.DisplayNameFor(model => model.IdUniversitaire)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.PhotoProfil)
-            </th>
-            <th>
+            </th>*@
+            @*<th>
                 @Html.DisplayNameFor(model => model.Fichier_Profil)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Email)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Standarized_Email)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Hash_Password)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Email_Confirm)
             </th>
@@ -55,7 +56,10 @@
                 @Html.DisplayFor(modelItem => item.ContactParent)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Ref_Groupe.Id_groupe)
+                @Html.DisplayFor(modelItem => item.Ref_Groupe.Ref_Filiere.Designation_Niveau)-
+                @Html.DisplayFor(modelItem => item.Ref_Groupe.Ref_Filiere.Designation_Filiere)-
+                @Html.DisplayFor(modelItem => item.Ref_Groupe.Ref_Filiere.Designation_Option)-|
+                @Html.DisplayFor(modelItem => item.Ref_Groupe.Designation_groupe)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.IdNational)
@@ -63,21 +67,21 @@
             <td>
                 @Html.DisplayFor(modelItem => item.IdUniversitaire)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.PhotoProfil)
-            </td>
-            <td>
+            </td>*@
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Fichier_Profil)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Email)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Standarized_Email)
             </td>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Hash_Password)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Email_Confirm)
             </td>

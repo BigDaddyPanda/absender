@@ -13,6 +13,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Day_Of_The_Week)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Start_Time)
             </th>
             <th>
@@ -33,6 +36,9 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Day_Of_The_Week)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Start_Time)
             </td>

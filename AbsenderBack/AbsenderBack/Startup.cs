@@ -76,7 +76,7 @@ namespace AbsenderBack
             db.Database.EnsureCreated(); 
 
             app.UseCors(builder =>
-                builder.WithOrigins("http://localhost:3000")
+                builder.WithOrigins("*")
                        .AllowAnyHeader()
                 ); 
         }

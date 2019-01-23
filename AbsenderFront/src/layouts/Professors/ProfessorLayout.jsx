@@ -11,6 +11,7 @@ import { Switch } from 'react-router-dom'
 import { getRoutesForLayout } from '../route_utils';
 import { getPerfectScrollBar, destroyPerfectScrollBar, updatePerfectScrollBar } from '../../designUtils';
 var ps;
+var logo = require("assets/img/favicon.png");
 export default class ProfessorLayout extends Component {
   constructor(props) {
     super(props);
@@ -21,13 +22,13 @@ export default class ProfessorLayout extends Component {
     };
   }
   componentDidMount() {
-    ps=getPerfectScrollBar(ps,this.refs.mainPanel);
+    ps = getPerfectScrollBar(ps, this.refs.mainPanel);
   }
   componentWillUnmount() {
-    ps=destroyPerfectScrollBar(ps);
+    ps = destroyPerfectScrollBar(ps);
   }
   componentDidUpdate(e) {
-    ps=updatePerfectScrollBar(ps,e,this.refs.mainPanel)
+    ps = updatePerfectScrollBar(ps, e, this.refs.mainPanel)
   }
   // this function opens and closes the sidebar on small devices
   toggleSidebar = () => {
@@ -58,9 +59,9 @@ export default class ProfessorLayout extends Component {
             routes={Professor_Routes}
             bgColor={this.state.backgroundColor}
             logo={{
-              outterLink: "https://www.creative-tim.com/",
+              outterLink: "#",
               text: "Creative Tim",
-              imgSrc: null
+              imgSrc: logo
             }}
             toggleSidebar={this.toggleSidebar}
           />
