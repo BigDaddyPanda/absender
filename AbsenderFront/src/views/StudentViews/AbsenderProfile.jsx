@@ -35,11 +35,11 @@ class AbsenderProfile extends Component {
                                 <img
                                     alt="..."
                                     className="avatar"
-                                    src={require("assets/img/emilyz.jpg")}
+                                    src={require("assets/img/mike.jpg")}
                                 />
                                 <h5 className="title">#123</h5>
                             </a>
-                            <p className="h3">Marine Ma</p>
+                            <p className="h3">Yyyy MMMM</p>
                         </div>
                         <div className=" px-4  justify-content-end card-description">
                         </div>

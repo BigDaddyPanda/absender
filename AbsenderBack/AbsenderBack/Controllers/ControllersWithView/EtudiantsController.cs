@@ -57,7 +57,7 @@ namespace AbsenderBack.Controllers.ControllersWithView
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ContactParent,Fk_Groupe,Id_Utilisateur,IdNational,IdUniversitaire,PhotoProfil,Fichier_Profil,Email,Standarized_Email,Hash_Password,Email_Confirm,Connect")] Etudiant etudiant)
+        public async Task<IActionResult> Create([Bind("ContactParent,Fk_Groupe,Id_Utilisateur,IdNational,IdUniversitaire,NomPrenom,PhotoProfil,Fichier_Profil,Email,Standarized_Email,Hash_Password,Email_Confirm,Connect")] Etudiant etudiant)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace AbsenderBack.Controllers.ControllersWithView
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("ContactParent,Fk_Groupe,Id_Utilisateur,IdNational,IdUniversitaire,PhotoProfil,Fichier_Profil,Email,Standarized_Email,Hash_Password,Email_Confirm,Connect")] Etudiant etudiant)
+        public async Task<IActionResult> Edit(string id, [Bind("ContactParent,Fk_Groupe,Id_Utilisateur,IdNational,IdUniversitaire,NomPrenom,PhotoProfil,Fichier_Profil,Email,Standarized_Email,Hash_Password,Email_Confirm,Connect")] Etudiant etudiant)
         {
             if (id != etudiant.Id_Utilisateur)
             {

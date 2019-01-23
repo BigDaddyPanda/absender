@@ -54,7 +54,7 @@ namespace AbsenderBack.Controllers.ControllersWithView
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Domaine,Id_Utilisateur,IdNational,IdUniversitaire,PhotoProfil,Fichier_Profil,Email,Standarized_Email,Hash_Password,Email_Confirm,Connect")] Professeur professeur)
+        public async Task<IActionResult> Create([Bind("Domaine,Id_Utilisateur,IdNational,IdUniversitaire,NomPrenom,PhotoProfil,Fichier_Profil,Email,Standarized_Email,Hash_Password,Email_Confirm,Connect")] Professeur professeur)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace AbsenderBack.Controllers.ControllersWithView
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("Domaine,Id_Utilisateur,IdNational,IdUniversitaire,PhotoProfil,Fichier_Profil,Email,Standarized_Email,Hash_Password,Email_Confirm,Connect")] Professeur professeur)
+        public async Task<IActionResult> Edit(string id, [Bind("Domaine,Id_Utilisateur,IdNational,IdUniversitaire,NomPrenom,PhotoProfil,Fichier_Profil,Email,Standarized_Email,Hash_Password,Email_Confirm,Connect")] Professeur professeur)
         {
             if (id != professeur.Id_Utilisateur)
             {

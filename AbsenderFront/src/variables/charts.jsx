@@ -29,8 +29,8 @@ let chart1_2_options = {
           zeroLineColor: "transparent"
         },
         ticks: {
-          suggestedMin: 60,
-          suggestedMax: 125,
+          suggestedMin: 5,
+          suggestedMax: 15,
           padding: 20,
           fontColor: "#9a9a9a"
         }
@@ -60,7 +60,7 @@ let chartExample1 = {
   data1: canvas => {
     let ctx = canvas.getContext("2d");
 
-    let gradientStroke = ctx.createLinearGradient(0, 230, 0, 50);
+    let gradientStroke = ctx.createLinearGradient(0, 50, 0, 10);
 
     gradientStroke.addColorStop(1, "rgba(29,140,248,0.2)");
     gradientStroke.addColorStop(0.4, "rgba(29,140,248,0.0)");
@@ -97,7 +97,7 @@ let chartExample1 = {
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: [100, 70, 90, 70, 85, 60, 75, 60, 90, 80, 110, 100]
+          data: [1,2,3,4,1,5,2,3,6,8,1,0]
         }
       ]
     };
@@ -142,7 +142,7 @@ let chartExample1 = {
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: [80, 120, 105, 110, 95, 105, 90, 100, 80, 95, 70, 120]
+          data: [1,2,3,4,1,5,2,3,6,8,1,0]
         }
       ]
     };
@@ -187,7 +187,7 @@ let chartExample1 = {
           pointHoverRadius: 4,
           pointHoverBorderWidth: 15,
           pointRadius: 4,
-          data: [60, 80, 65, 130, 80, 105, 90, 130, 70, 115, 60, 130]
+          data:[1,2,3,4,1,5,2,3,6,8,1,0]
         }
       ]
     };

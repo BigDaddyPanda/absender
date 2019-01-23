@@ -60,7 +60,7 @@ export default class StudentLayout extends Component {
             bgColor={this.state.backgroundColor}
             logo={{
               outterLink: "#",
-              text: "Creative Tim",
+              text: "Absender",
               imgSrc: logo
             }}
             toggleSidebar={this.toggleSidebar}

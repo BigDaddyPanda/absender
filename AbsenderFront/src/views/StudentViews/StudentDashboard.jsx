@@ -7,11 +7,11 @@ import { connect } from 'react-redux'
 
 // reactstrap components
 import {
-    Button, 
+    Button,
     Card,
     CardHeader,
     CardBody,
-    CardTitle, 
+    CardTitle,
     Table,
     Row,
     Col,
@@ -22,7 +22,7 @@ import {
 
 // core components
 import {
-    chartExample1, 
+    chartExample1,
 } from "variables/charts.jsx";
 import { mapStateToProps, multipleActionsMapDispatchToProps } from "../../redux/_helpers";
 
@@ -131,9 +131,10 @@ class StudentDashboard extends React.Component {
                                                 className="avatar"
                                                 src={require("assets/img/mike.jpg")}
                                             />
-                                            <h5 className="title">Samir Lahnin</h5>
+                                            <h5 className="title">Yyyy MMMM</h5>
                                         </a>
                                         <p className="description">3 GL-BD -A</p>
+                                        <h6 className="title">ky94@live.com</h6>
                                     </div>
                                     {/* <div className="card-description">
                                         Do not be scared of the truth because we need to restart the
@@ -158,8 +159,8 @@ class StudentDashboard extends React.Component {
                                 <CardHeader>
                                     <Row>
                                         <Col className="text-left" sm="6">
-                                            <h5 className="card-category">Total Shipments</h5>
-                                            <CardTitle tag="h2">Performance</CardTitle>
+                                            <h5 className="card-category">{"Progrès de Presence"}</h5>
+                                            <CardTitle tag="h2">Record de Présence</CardTitle>
                                         </Col>
                                     </Row>
                                 </CardHeader>

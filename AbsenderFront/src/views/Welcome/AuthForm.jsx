@@ -41,10 +41,11 @@ class AuthForm extends Component {
         });
     }
 
-    submitForm(e) { 
-        this.validateEmail(this.state.email)
-        console.log(this.state.email);
-        history.push('student/dashboard')
+    submitForm(e) {
+        // this.validateEmail(this.state.email)
+        // console.log(this.state.email);
+        history.push('/' + e + '/dashboard')
+        window.location.reload()
     }
 
     render() {
@@ -72,9 +73,9 @@ class AuthForm extends Component {
                                 That's a tasty looking email you've got there.
               </FormFeedback> */}
                             <FormFeedback>
-                                {"Uh oh! Looks like there is an issue with your email. Please input a correct email."}
+                                {"Email incorrect."}
                             </FormFeedback>
-                            <FormText>Your username is most likely your email.</FormText>
+                            <FormText>Votre email.</FormText>
                         </FormGroup>
                     </Col>
                     <Col>
@@ -91,7 +92,8 @@ class AuthForm extends Component {
                         </FormGroup>
                     </Col>
                     <Col className="ml-auto">
-                        <Button onClick={(e) => this.submitForm(e)}>Submit</Button>
+                        <Button onClick={() => this.submitForm("professor")}>Teacher</Button>
+                        <Button onClick={() => this.submitForm("student")}>Student</Button>
                     </Col>
                 </Form>
             </Container>

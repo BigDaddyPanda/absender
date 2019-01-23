@@ -15,7 +15,7 @@ namespace AbsenderAPI.Models
         public string Id_Utilisateur { get; set; }
         public string IdNational{ get; set; }
         public string IdUniversitaire{ get; set; }
-
+        public string NomPrenom { get; set; }
         public string PhotoProfil{ get; set; }
         public byte[] Fichier_Profil { get; set; }
 

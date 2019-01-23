@@ -20,7 +20,7 @@ export default class App extends Component {
                     <Route path="/professor" render={props => <ProfessorLayout {...props} />} />
                     <Route path="/student" render={props => <StudentLayout {...props} />} />
                     <Route path="/welcome" render={props => <WelcomeLayout {...props} />} />
-                    <Redirect from="/*" to="/admin/dashboard" />
+                    <Redirect from="/*" to="/welcome" />
                 </Switch>
             </Router>
         );
